@@ -2,11 +2,14 @@ require('dotenv').config();
 const { json } = require('body-parser');
 const { Router } = require('express');
 const axios = require('axios')
+const {dogs, Dog} = require('../db');
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {
     URL_API
   } = process.env;
+
 
 
 const router = Router();
@@ -57,31 +60,39 @@ router.get('/dogs', async (req, res)=> {  // Back 1 y 2
 
 router.get('/dogs/:id', async(req, res) => {
     let {id} = req.params
-    if(typeof id === 'number'){
+    if(typeof id === 'number') {
         try {
-            const perros = await axios(`${URL_API}`) 
-            const filtrado = perros.data.find(p=>p.id === id )
-            if(!filtrado) return res.send('No hay datos para tu busqueda')
-            res.json(filtrado)
-            
+            let perros = await axios(`${URL_API}`) 
+            let buscado= perros.data.find(p=> p.id = id)       
+            console.log(buscado)
+            res.json(buscado)
         } catch (error) {
-            res.status(404).send('Ups algo salio mal')
+            res.status(404).send('hubo un error.')
         }
+
     } else {
         try {
-            const result = await dogs.findAll({
-                where: {
-                    id: id
-                }
-            })
-            if(!result) return res.send('No hay datos para mostrar (BD)')
-            res.json(result)
-            
+            // const buscaDB = await Dog.findAll({
+            //     where: {
+            //         id: id
+            //     }
+            //     include : [
+            //         []
+            //     ]
+            // })
+            // let datosPedidos = {  
+            //     imagen: buscaDB.imagen,
+            //     nombre: buscaDB.name,   
+            //     temperamento: buscaDB.temperament, 
+            //     peso: buscaDB.weight 
+
+            // }
         } catch (error) {
-            res.status(404).send('Hombres trabajando (BD)')
+            
         }
-        
-}})
+
+    }
+})
 
     
 
