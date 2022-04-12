@@ -59,39 +59,35 @@ router.get('/dogs', async (req, res)=> {  // Back 1 y 2
     })
 
 router.get('/dogs/:id', async(req, res) => {
-    let {id} = req.params
-    if(typeof id === 'number') {
+        let {id} = req.params    
         try {
-            let perros = await axios(`${URL_API}`) 
-            let buscado= perros.data.find(p=> p.id = id)       
-            console.log(buscado)
+            let perros = await axios(URL_API) 
+            let buscado= perros.data.find(p=> p.id = id)                
+            
             res.json(buscado)
         } catch (error) {
             res.status(404).send('hubo un error.')
-        }
+        }    
+})
 
-    } else {
-        try {
-            // const buscaDB = await Dog.findAll({
-            //     where: {
-            //         id: id
-            //     }
-            //     include : [
-            //         []
-            //     ]
-            // })
-            // let datosPedidos = {  
-            //     imagen: buscaDB.imagen,
-            //     nombre: buscaDB.name,   
-            //     temperamento: buscaDB.temperament, 
-            //     peso: buscaDB.weight 
+router.get('/temperament', async(req, res)=> {    
+    try {        
+        const perros = await axios(URL_API)
+        const tempApi = perros.data.map((p)=> p.temperament ? p.temperament : '').map(s=>  s?.split(', ')).flat()
+        const result = tempApi.reduce((acc,item)=>{
+            if(!acc.includes(item) && item !== ''){
+                acc.push(item);
+            }
+            return acc;
+          },[])              
+          res.json(result)
 
-            // }
-        } catch (error) {
-            
-        }
-
+    } catch (error) {
+        res.status(404).send(error)
     }
+
+    
+
 })
 
     
