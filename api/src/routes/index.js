@@ -8,7 +8,7 @@ const { Op } = require("sequelize");
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {
-    URL_API
+    URL_API, URL_NAME
 } = process.env;
 
 
@@ -33,11 +33,20 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
                 }
                 return perro
             })
-            const datosDB = (await Dog.findAll()).map(p=>{ 
+            const datosDB = (await Dog.findAll(            
+            {
+                include: {
+                        model: Temperamento,
+                        attributes: ["nombre"],
+                        through: { attributes: [] },
+                }
+            }
+            )).map(p=>{ 
                 let pdb = {
                     imagen: p.imagen,
                     nombre: p.nombre,                     
-                    peso: p.peso
+                    peso: p.peso,
+                    temperamento: p.temperamentos.map(t=> t.nombre)                    
                 }
                 return pdb                
             })
@@ -49,14 +58,14 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
         }
     } else {
         try {
-            const perros = await axios(`${URL_API}`)
+            const perros = await axios(URL_API)
             const filtrados = perros.data.filter(p => p.name.toLowerCase().includes(name.toLowerCase()))
             const final = filtrados.map(p => {
                 let perro = {
                     imagen: p.image.url,
                     nombre: p.name,
                     temperamento: p.temperament,
-                    peso: p.weight
+                    peso: p.weight.metric
                 }
                 return perro
             })
@@ -67,19 +76,65 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
     }
 })
 
-router.get('/dogs/:id', async (req, res) => {
+router.get('/dogs/:id', async (req, res) => {    ///  Hecha!
     let { id } = req.params
-    try {
-        let perros = await axios(URL_API)
-        let buscado = perros.data.find(p => p.id = id)
+    if(id.length === 36) {
+        try {
+            let buscoPerro = await Dog.findOne({
+                    attributes: ["nombre", "altura", "peso", "años_de_vida", "imagen"], 
+                    where: {
+                        id: id
+                    },
+                    include: {
+                            model: Temperamento,
+                            attributes: ["nombre" ],
+                            through: { attributes: [] },
+                    }
+                })
+                if(!buscoPerro) return res.status(404).send(`No existe un perro con el "${id}"`)
+                let temps = buscoPerro.temperamentos.map(t=> t.nombre)
 
-        res.json(buscado)
-    } catch (error) {
-        res.status(404).send('hubo un error.')
+                buscoPerro1 = { 
+                    nombre: buscoPerro.nombre,
+                    peso: buscoPerro.peso,                    
+                    altura: buscoPerro.altura,
+                    años_de_vida: buscoPerro.años_de_vida,
+                    imagen: buscoPerro.imagen,                                       
+                    temperamentos: temps.toString()
+                }            
+                
+            res.json(buscoPerro1)
+
+        } catch (error) {
+            res.send(error)
+        }
+
+    } else {
+        try {
+            let perros = await axios(URL_API)
+            let buscado = perros.data.find(p =>  p.id === id)
+            //console.log(buscado)
+            resp = {
+                id: buscado.id,
+                imagen: buscado.image.url,
+                nombre: buscado.name, 
+                temperamento: buscado.temperament,
+                altura: buscado.height.metric,
+                peso: buscado.weight.metric,                
+                años_de_vida: buscado.life_span,
+                temperamento: buscado.temperament
+            }
+    
+            return res.json(resp)
+        } catch (error) {
+            return res.status(404).send('hubo un error.')
+        }
     }
 })
 
-router.get('/temperament', async (req, res) => {
+
+
+router.get('/temperament', async (req, res) => { // hecha!!!
     try {
         const hayDatos = await Temperamento.findAll()
         if (!hayDatos.length) {
@@ -103,7 +158,7 @@ router.get('/temperament', async (req, res) => {
     }
 })
 
-router.post('/dog', async(req, res)=>{
+router.post('/dog', async(req, res)=>{ // hecha!!
     let {nombre, altura, peso, años_de_vida, imagen, temperamentos} = req.body
     if(!nombre || !altura || !peso) return res.status(404).send('Faltan datos necesarios')
     try {        
@@ -126,10 +181,6 @@ router.post('/dog', async(req, res)=>{
         res.status(404).send(error)        
     }
 })
-
-
-
-
 
 
 module.exports = router;
