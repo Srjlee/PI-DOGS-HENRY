@@ -29,7 +29,7 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
                     imagen: p.image.url,
                     nombre: p.name,
                     temperamento: p.temperament,
-                    peso: p.weight
+                    peso: p.weight.metric
                 }
                 return perro
             })
@@ -112,10 +112,9 @@ router.get('/dogs/:id', async (req, res) => {    ///  Hecha!
     } else {
         try {
             let perros = await axios(URL_API)
-            let buscado = perros.data.find(p =>  p.id === id)
-            //console.log(buscado)
-            resp = {
-                id: buscado.id,
+            let buscado = perros.data.find(p =>  p.id == id)
+            if(!buscado) return res.status(201).send('No esta tu amigo en la lista!')
+            let resp = {                
                 imagen: buscado.image.url,
                 nombre: buscado.name, 
                 temperamento: buscado.temperament,

@@ -1,39 +1,39 @@
-import { GET_ALL_CHARACTERS, GET_CHARACTER_DETAIL, SEARCH_CHARACTER , CLEAR_DETAIL} from "../actions/actions";
+import { GET_ALL_DOGS, GET_DOG_DETAIL, SEARCH_DOG, CLEAR_DETAIL} from "../actions/actions";
 
 const initialState ={
-    allCharacters: [],
-    characterDetail:{},
-    searchChar:[]
+    allDogs: [],
+    DogDetail:{},
+    searchDog:[]
 }
 
 function reducer(state=initialState, {type, payload}){
     switch(type){
 
-        case GET_ALL_CHARACTERS:{
+        case GET_ALL_DOGS:{
             return {
             ...state,
-            allCharacters: payload
+            allDogs: payload
         }
     }
 
-        case GET_CHARACTER_DETAIL:{
+        case GET_DOG_DETAIL:{
             return {
                 ...state,
-                characterDetail: payload
+                DogDetail: payload
             }
         }
 
         case CLEAR_DETAIL:{
             return {
                 ...state,
-                characterDetail:{}
+                DogDetail:{}
             }
         }
 
-        case SEARCH_CHARACTER:{
+        case SEARCH_DOG:{
             return {
                 ...state,
-                searchChar: payload
+                searchDog: payload
             }
         }
 
