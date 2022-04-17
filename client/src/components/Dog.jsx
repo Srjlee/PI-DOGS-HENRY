@@ -1,18 +1,33 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { getDogDetail } from '../redux/actions/actions';
+import {useDispatch} from 'react-redux';
+import './Dog.css'
 
-export default function Dog (props) {
+export default function Dog ({id, imagen, nombre, temperamento, peso}) {
+    const dispatch = useDispatch()
+
+    const pDetail = (e)=> {
+        dispatch(getDogDetail(id))    
+    }
+
+
     return (
-        <div>
+        
 
-            <div className="card">
-                <img src={props.imagen} alt="aun no cargo" />
-                <div className="datos">
-                    <p className="nombre">Raza: {props.nombre} </p>
-                    <p className="temperamento">Temperamento: {props.temperamento}</p>
-                    <p className="peso">Peso: {props.peso}</p>
+            <div className="perro" key={id}>
+                <img src={imagen} alt="aun no cargo" className="perroImg"/>
+                <div className="perroDatos">
+                    
+                    <Link to={`/dogs/${id}`}>
+                    <h4 className="perroN" onClick={pDetail}>Raza: {nombre} </h4>
+                    </Link>
+                    <p className="perroT">Temperamento: {temperamento}</p>
+                    <p className="perroP">Peso: {peso}</p>
                 </div>
             </div>
+            
 
-        </div>
+        
     )
 }

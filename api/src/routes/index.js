@@ -26,6 +26,7 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
             const perros = await axios(`${URL_API}`)
             const datosApi = perros.data.map(p => {
                 let perro = {
+                    id: p.id,
                     imagen: p.image.url,
                     nombre: p.name,
                     temperamento: p.temperament,
@@ -43,6 +44,7 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
             }
             )).map(p=>{ 
                 let pdb = {
+                    id: p.id,
                     imagen: p.imagen,
                     nombre: p.nombre,                     
                     peso: p.peso,
@@ -62,6 +64,7 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
             const filtrados = perros.data.filter(p => p.name.toLowerCase().includes(name.toLowerCase()))
             const final = filtrados.map(p => {
                 let perro = {
+                    id: p.id,
                     imagen: p.image.url,
                     nombre: p.name,
                     temperamento: p.temperament,
@@ -95,6 +98,7 @@ router.get('/dogs/:id', async (req, res) => {    ///  Hecha!
                 let temps = buscoPerro.temperamentos.map(t=> t.nombre)
 
                 buscoPerro1 = { 
+                    id: buscoPerro.id,
                     nombre: buscoPerro.nombre,
                     peso: buscoPerro.peso,                    
                     altura: buscoPerro.altura,
@@ -114,7 +118,8 @@ router.get('/dogs/:id', async (req, res) => {    ///  Hecha!
             let perros = await axios(URL_API)
             let buscado = perros.data.find(p =>  p.id == id)
             if(!buscado) return res.status(201).send('No esta tu amigo en la lista!')
-            let resp = {                
+            let resp = {         
+                id: buscado.id,       
                 imagen: buscado.image.url,
                 nombre: buscado.name, 
                 temperamento: buscado.temperament,

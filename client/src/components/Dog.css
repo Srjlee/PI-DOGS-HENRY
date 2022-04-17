@@ -1,0 +1,22 @@
+
+ 
+ 
+.perros {
+  display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding:0px 150px 0px 150px;
+}
+
+.perro {
+    display: flex;
+    flex-direction:column;
+    width: 200px;
+    height: 250 px;
+
+} 
+.perroImg {
+    max-height: 140px ;
+    
+
+}
