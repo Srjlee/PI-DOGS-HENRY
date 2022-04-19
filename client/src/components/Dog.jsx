@@ -4,7 +4,7 @@ import { getDogDetail } from '../redux/actions/actions';
 import {useDispatch} from 'react-redux';
 import './Dog.css'
 
-export default function Dog ({id, imagen, nombre, temperamento, peso}) {
+export default function Dog ({id, image, name, temperament, weight}) {
     const dispatch = useDispatch()
 
     const pDetail = (e)=> {
@@ -16,14 +16,14 @@ export default function Dog ({id, imagen, nombre, temperamento, peso}) {
         
 
             <div className="perro" key={id}>
-                <img src={imagen} alt="aun no cargo" className="perroImg"/>
+                <img src={image} alt="aun no cargo" className="perroImg"/>
                 <div className="perroDatos">
                     
                     <Link to={`/dogs/${id}`}>
-                    <h4 className="perroN" onClick={pDetail}>Raza: {nombre} </h4>
+                    <h4 className="perroN" onClick={pDetail}> {name} </h4>
                     </Link>
-                    <p className="perroT">Temperamento: {temperamento}</p>
-                    <p className="perroP">Peso: {peso}</p>
+                    <p className="perroT">Temperamento: {temperament}</p>
+                    <p className="perroP">Peso: {weight}</p>
                 </div>
             </div>
             

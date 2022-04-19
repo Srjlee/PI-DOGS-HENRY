@@ -1,4 +1,8 @@
 
+ body {
+     
+ }
+
  
  
 .perros {
@@ -13,6 +17,7 @@
     flex-direction:column;
     width: 200px;
     height: 250 px;
+    background-color: grey;
 
 } 
 .perroImg {

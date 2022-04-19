@@ -2,7 +2,7 @@ require('dotenv').config();
 const { json } = require('body-parser');
 const { Router } = require('express');
 const axios = require('axios')
-const { dogs, Dog, Temperamento } = require('../db');
+const { Dog, Temperamento } = require('../db');
 const { Op } = require("sequelize");
 
 // Importar todos los routers;
@@ -27,10 +27,10 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
             const datosApi = perros.data.map(p => {
                 let perro = {
                     id: p.id,
-                    imagen: p.image.url,
-                    nombre: p.name,
-                    temperamento: p.temperament,
-                    peso: p.weight.metric
+                    image: p.image.url,
+                    name: p.name,
+                    temperament: p.temperament,
+                    weight: p.weight.metric
                 }
                 return perro
             })
@@ -38,17 +38,17 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
             {
                 include: {
                         model: Temperamento,
-                        attributes: ["nombre"],
+                        attributes: ["name"],
                         through: { attributes: [] },
                 }
             }
             )).map(p=>{ 
                 let pdb = {
                     id: p.id,
-                    imagen: p.imagen,
-                    nombre: p.nombre,                     
-                    peso: p.peso,
-                    temperamento: p.temperamentos.map(t=> t.nombre)                    
+                    image: p.image,
+                    name: p.name, 
+                    weight: p.weight,
+                    temperament: p.temperamentos.map(t=> t.name).toString()                    
                 }
                 return pdb                
             })
@@ -56,7 +56,7 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
             res.json(unidos)
 
         } catch (error) {
-            res.status(404).send('Algo salio mal, intenta en unos minutos')
+            res.status(404).send(error)
         }
     } else {
         try {
@@ -65,14 +65,33 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
             const final = filtrados.map(p => {
                 let perro = {
                     id: p.id,
-                    imagen: p.image.url,
-                    nombre: p.name,
-                    temperamento: p.temperament,
-                    peso: p.weight.metric
+                    image: p.image.url,
+                    name: p.name,
+                    temperament: p.temperament,
+                    weight: p.weight.metric
                 }
                 return perro
             })
-            res.json(final)
+            
+            const perrosDB = (await Dog.findAll({
+                where:{name: {[Op.iLike]: `%${name}%`}},
+                include: {
+                    model: Temperamento,
+                    attributes: ["name"],
+                    through: { attributes: [] },
+            }})).map(p=>{
+                return {
+                    id: p.id,
+                    image: p.image,
+                    name: p.name, 
+                    weight: p.weight,
+                    temperament: p.temperamentos.map(t=> t.name).toString()                    
+                }
+            })
+
+            
+
+            res.json(perrosDB.concat(final));
         } catch (error) {
             res.status(404).send('No hay datos con ese nombre')
         }
@@ -84,27 +103,27 @@ router.get('/dogs/:id', async (req, res) => {    ///  Hecha!
     if(id.length === 36) {
         try {
             let buscoPerro = await Dog.findOne({
-                    attributes: ["nombre", "altura", "peso", "años_de_vida", "imagen"], 
+                    attributes: ["name", "height", "weight", "life_span", "image"], 
                     where: {
                         id: id
                     },
                     include: {
                             model: Temperamento,
-                            attributes: ["nombre" ],
+                            attributes: ["name" ],
                             through: { attributes: [] },
                     }
                 })
                 if(!buscoPerro) return res.status(404).send(`No existe un perro con el "${id}"`)
-                let temps = buscoPerro.temperamentos.map(t=> t.nombre)
+                let temps = buscoPerro.temperamentos.map(t=> t.name)
 
                 buscoPerro1 = { 
                     id: buscoPerro.id,
-                    nombre: buscoPerro.nombre,
-                    peso: buscoPerro.peso,                    
-                    altura: buscoPerro.altura,
-                    años_de_vida: buscoPerro.años_de_vida,
-                    imagen: buscoPerro.imagen,                                       
-                    temperamentos: temps.toString()
+                    name: buscoPerro.name,
+                    weight: buscoPerro.weight,                    
+                    height: buscoPerro.height,
+                    life_span: buscoPerro.life_span,
+                    image: buscoPerro.image,                                       
+                    temperament: temps.toString()
                 }            
                 
             res.json(buscoPerro1)
@@ -120,13 +139,13 @@ router.get('/dogs/:id', async (req, res) => {    ///  Hecha!
             if(!buscado) return res.status(201).send('No esta tu amigo en la lista!')
             let resp = {         
                 id: buscado.id,       
-                imagen: buscado.image.url,
-                nombre: buscado.name, 
-                temperamento: buscado.temperament,
-                altura: buscado.height.metric,
-                peso: buscado.weight.metric,                
-                años_de_vida: buscado.life_span,
-                temperamento: buscado.temperament
+                image: buscado.image.url,
+                name: buscado.name, 
+                temperament: buscado.temperament,
+                height: buscado.height.metric,
+                weight: buscado.weight.metric,                
+                life_span: buscado.life_span,
+                temperament: buscado.temperament
             }
     
             return res.json(resp)
@@ -150,8 +169,9 @@ router.get('/temperament', async (req, res) => { // hecha!!!
                 }
                 return acc;
             }, [])
+            console.log(result)
             let datos = result.map(c => {
-                let dato = { nombre: c }
+                let dato = { name: c }
                 return dato
             })
             await Temperamento.bulkCreate(datos)
@@ -163,17 +183,17 @@ router.get('/temperament', async (req, res) => { // hecha!!!
 })
 
 router.post('/dog', async(req, res)=>{ // hecha!!
-    let {nombre, altura, peso, años_de_vida, imagen, temperamentos} = req.body
-    if(!nombre || !altura || !peso) return res.status(404).send('Faltan datos necesarios')
+    let {name, height, weight, life_span, image, temperamentos} = req.body
+    if(!name || !height || !weight) return res.status(404).send('Faltan datos necesarios')
     try {        
         const [nuevoPerro, created] = await Dog.findOrCreate( {
-            where: {nombre: nombre},
+            where: {name: name},
             defaults: {
-                nombre: nombre,
-                altura: altura,
-                peso: peso,
-                años_de_vida: años_de_vida,
-                imagen: imagen
+                name: name,
+                height: height,
+                weight: weight,
+                life_span: life_span,
+                image: image
             }
         })
         if(created) {

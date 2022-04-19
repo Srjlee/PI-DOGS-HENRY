@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { clearDetail } from '../redux/actions/actions';
+import './Dog.css'
+
 
 export default function DogDetail() {
     const dispatch = useDispatch()
@@ -18,13 +20,13 @@ useEffect(() => {
   return (
     <div>
       {  p ?  <div className="perroDetail">
-            <img src={p.imagen} alt="" className="pDetailImg" />
+            <img src={p.image} alt="" className="pDetailImg" />
             <div className="pDetailDatos">
-                <h2>{p.nombre}</h2>
-                <p>{p.temperamento}</p>
-                <p>{p.peso}</p>
-                <p>{p.altura}</p>
-                <p>{p.años_de_vida}</p>
+                <h2>{p.name}</h2>
+                <p>{p.temperament}</p>
+                <p>{p.weight}</p>
+                <p>{p.height}</p>
+                <p>{p.life_span}</p>
             </div>
             <Link to='/dogs'>
             <button>Volver</button>

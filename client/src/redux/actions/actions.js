@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_ALL_DOGS ="GET_ALL_DOGS";
 export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
 export const SEARCH_DOG = "SEARCH_DOG";
+export const CLEAR_SEARCH = "CLEAR_SEARCH"
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const CREATE_DOG = "CREATE_DOG";
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS";
@@ -67,7 +68,7 @@ export function clearDetail(){
 export function searchbar(name){
     return async function (dispatch){
         try {
-            const r = await fetch(`${URL_DOGS}`);
+            const r = await fetch(`${URL_DOGS}?name=${name}`);
             const res = await r.json();
             return dispatch({ type: SEARCH_DOG, payload: res });
         } catch (error) {
@@ -96,5 +97,8 @@ export function getTemperaments () {
             
         }
     }
+}
 
+export function clearSearch (){
+    return {type: CLEAR_SEARCH}
 }
