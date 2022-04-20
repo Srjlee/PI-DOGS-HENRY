@@ -1,4 +1,4 @@
-import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAR_SEARCH, SEARCH_DOG, CLEAR_DETAIL,CLEAR_ALLDOG, GET_TEMPERAMENTS, FILTER_TEMPERAMENTS,FILTER_ORIGIN,ORDER_WEIGHT,ORDER_AZ,ORDER_ZA} from "../actions/actions";
+import { GET_ALL_DOGS, GET_DOG_DETAIL, ORDER_WEIGHT_ASC, ORDER_WEIGHT_DESC, CLEAR_SEARCH, SEARCH_DOG, CLEAR_DETAIL,CLEAR_ALLDOG, GET_TEMPERAMENTS, FILTER_TEMPERAMENTS,FILTER_ORIGIN,ORDER_WEIGHT,ORDER_AZ,ORDER_ZA} from "../actions/actions";
 import { store } from "../store/store";
 
 const initialState ={
@@ -32,13 +32,42 @@ function reducer(state=initialState, {type, payload}){
         case FILTER_ORIGIN:{
 
         }
-        case ORDER_WEIGHT:{
-
-        }
+        case ORDER_WEIGHT_ASC:{
+            if(!state.searchDog) {                
+                let ordenado = ordenar([...state.allDogs], 'weight' )
+                return {...state, allDogs: ordenado}
+            } else {
+                let ordenado = ordenar([...state.searchDog], 'weight')
+                return {...state, searchDog: ordenado}
+            }
+        }        
+        case ORDER_WEIGHT_DESC:{
+            if(!state.searchDog) {                
+                let ordenado = ordenar([...state.allDogs], 'weight' ).reverse()
+                return {...state, allDogs: ordenado}
+            } else {
+                let ordenado = ordenar([...state.searchDog], 'weight').reverse()
+                return {...state, searchDog: ordenado}
+            }
+        }        
         case ORDER_AZ:{
+            if(!state.searchDog) {                
+                let ordenado = ordenar([...state.allDogs], 'name' )
+                return {...state, allDogs: ordenado}
+            } else {
+                let ordenado = ordenar([...state.searchDog], 'name')
+                return {...state, searchDog: ordenado}
+            }
 
         }
         case ORDER_ZA:{
+            if(!state.searchDog) {                
+                let ordenado = ordenar([...state.allDogs], 'name' ).reverse()
+                return {...state, allDogs: ordenado}
+            } else {
+                let ordenado = ordenar([...state.searchDog], 'name').reverse()
+                return {...state, searchDog: ordenado}
+            }
 
         }
         case CLEAR_ALLDOG:{
@@ -54,8 +83,8 @@ function reducer(state=initialState, {type, payload}){
             allDogs: payload
         }
     }
-
         case GET_DOG_DETAIL:{
+            
             return {
                 ...state,
                 DogDetail: payload

@@ -23,10 +23,10 @@ useEffect(() => {
             <img src={p.image} alt="" className="pDetailImg" />
             <div className="pDetailDatos">
                 <h2>{p.name}</h2>
-                <p>{p.temperament}</p>
-                <p>{p.weight}</p>
-                <p>{p.height}</p>
-                <p>{p.life_span}</p>
+                <p>Temperament: {p.temperament}</p>
+                <p>Weight: {p.weight}</p>
+                <p>Height: {p.height}</p>
+                <p>Life Span:{p.life_span}</p>
             </div>
             <Link to='/dogs'>
             <button>Volver</button>

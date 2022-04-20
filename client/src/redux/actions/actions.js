@@ -10,7 +10,8 @@ export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS";
 export const CLEAR_ALLDOG = "CLEAR_ALLDOG";
 export const FILTER_TEMPERAMENTS = "FILTER_TEMPERAMENTS";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
-export const ORDER_WEIGHT = "ORDER_WEIGHT";
+export const ORDER_WEIGHT_ASC = "ORDER_WEIGHT_ASC";
+export const ORDER_WEIGHT_DESC = "ORDER_WEIGHT_DESC";
 export const ORDER_AZ = "ORDER_AZ";
 export const ORDER_ZA = "ORDER_ZA";
 
@@ -24,8 +25,11 @@ export function filterTemperament(temp) {
 export function filterOrigin(){
     return {type: FILTER_ORIGIN}
 }
-export function orderWeight(){
-    return {type: ORDER_WEIGHT}
+export function orderWeightAsc(){
+    return {type: ORDER_WEIGHT_ASC}
+}
+export function orderWeightDesc(){
+    return {type: ORDER_WEIGHT_DESC}
 }
 export function orderAZ(){
     return {type: ORDER_AZ}

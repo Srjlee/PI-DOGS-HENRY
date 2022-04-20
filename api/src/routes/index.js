@@ -25,12 +25,13 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
         try {
             const perros = await axios(`${URL_API}`)
             const datosApi = perros.data.map(p => {
+                let peso = p.weight.metric?.split('-')
                 let perro = {
                     id: p.id,
                     image: p.image.url,
                     name: p.name,
                     temperament: p.temperament,
-                    weight: p.weight.metric
+                    weight: peso
                 }
                 return perro
             })
@@ -42,7 +43,7 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
                         through: { attributes: [] },
                 }
             }
-            )).map(p=>{ 
+            )).map(p=>{                 
                 let pdb = {
                     id: p.id,
                     image: p.image,
@@ -63,12 +64,14 @@ router.get('/dogs', async (req, res) => {  // Back 1 y 2
             const perros = await axios(URL_API)
             const filtrados = perros.data.filter(p => p.name.toLowerCase().includes(name.toLowerCase()))
             const final = filtrados.map(p => {
+                let peso = p.weight.metric?.split('-')
+                
                 let perro = {
                     id: p.id,
                     image: p.image.url,
                     name: p.name,
                     temperament: p.temperament,
-                    weight: p.weight.metric
+                    weight: peso
                 }
                 return perro
             })
@@ -169,7 +172,7 @@ router.get('/temperament', async (req, res) => { // hecha!!!
                 }
                 return acc;
             }, [])
-            console.log(result)
+            
             let datos = result.map(c => {
                 let dato = { name: c }
                 return dato
