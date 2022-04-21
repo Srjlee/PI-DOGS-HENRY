@@ -32,3 +32,6 @@
     object-fit: cover ;
     
 }
+.pagination {
+    list-style:none;
+}
