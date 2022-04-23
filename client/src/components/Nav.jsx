@@ -27,7 +27,7 @@ export default function Nav() {
   }, []);
   const temps = useSelector(state => state.temps)
   const dogs = useSelector(state => state.allDogs)
-  const searchDog = useSelector(state => state.searchDog)
+  
   const filter = (e) => {
     dispatch(filterTemperament((e.target.value).toLowerCase()))
 

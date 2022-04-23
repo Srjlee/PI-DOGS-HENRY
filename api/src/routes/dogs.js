@@ -11,6 +11,12 @@ const {
 
 const router = Router();
 
+function validarPeso(peso) {
+    let [min, max] = peso.split("-");
+    min = isNaN(min) ? "x" : parseInt(min);
+    max = isNaN(max) ? "x" : parseInt(max);
+    return [min, max];
+  }
 
 router.get('/', async (req, res) => {  // Back 1 y 2
     let { name } = req.query
@@ -18,13 +24,12 @@ router.get('/', async (req, res) => {  // Back 1 y 2
         try {
             const perros = await axios(`${URL_API}`)
             const datosApi = perros.data.map(p => {
-                let peso = p.weight.metric?.split('-')
                 let perro = {
                     id: p.id,
                     image: p.image.url,
                     name: p.name,
                     temperament: p.temperament,
-                    weight: peso
+                    weight: validarPeso(p.weight.metric)
                 }
                 return perro
             })
@@ -57,14 +62,12 @@ router.get('/', async (req, res) => {  // Back 1 y 2
             const perros = await axios(URL_API)
             const filtrados = perros.data.filter(p => p.name.toLowerCase().includes(name.toLowerCase()))
             const final = filtrados.map(p => {
-                let peso = p.weight.metric?.split('-')
-                
                 let perro = {
                     id: p.id,
                     image: p.image.url,
                     name: p.name,
                     temperament: p.temperament,
-                    weight: peso
+                    weight: validarPeso(p.weight.metric)
                 }
                 return perro
             })
@@ -139,7 +142,7 @@ router.get('/:id', async (req, res) => {    ///  Hecha!
                 name: buscado.name, 
                 temperament: buscado.temperament,
                 height: buscado.height.metric,
-                weight: buscado.weight.metric,                
+                weight: validarPeso(buscado.weight.metric),
                 life_span: buscado.life_span,
                 temperament: buscado.temperament
             }

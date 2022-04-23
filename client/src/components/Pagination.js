@@ -10,6 +10,7 @@ const Pagination = ({ dogsPerPage, totalDogs, paginate }) => {
 
   return (
     <nav>
+         <button > ◀️ </button>
       <ul className='pagination'>
         {pageNumbers.map(number => (
           <li key={number} className='page-item'>
