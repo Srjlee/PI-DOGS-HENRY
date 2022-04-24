@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const GET_ALL_DOGS ="GET_ALL_DOGS";
+export const GET_ALL_DOGS = "GET_ALL_DOGS";
 export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
 export const SEARCH_DOG = "SEARCH_DOG";
 export const CLEAR_SEARCH = "CLEAR_SEARCH"
@@ -16,30 +16,30 @@ export const ORDER_AZ = "ORDER_AZ";
 export const ORDER_ZA = "ORDER_ZA";
 
 const URL_DOGS = "http://localhost:3001/dogs";
-// const URL_DOG = "http://localhost:3001/dog";
-const URL_TEMPERAMENT = "http://localhost:3001/temperament" 
+const URL_DB = "http://localhost:3001/dog";
+const URL_TEMPERAMENT = "http://localhost:3001/temperament"
 
 export function filterTemperament(temp) {
-    return {type: FILTER_TEMPERAMENTS, payload: temp}
+    return { type: FILTER_TEMPERAMENTS, payload: temp }
 }
-export function filterOrigin(){
-    return {type: FILTER_ORIGIN}
+export function filterOrigin() {
+    return { type: FILTER_ORIGIN }
 }
-export function orderWeightAsc(){
-    return {type: ORDER_WEIGHT_ASC}
+export function orderWeightAsc() {
+    return { type: ORDER_WEIGHT_ASC }
 }
-export function orderWeightDesc(){
-    return {type: ORDER_WEIGHT_DESC}
+export function orderWeightDesc() {
+    return { type: ORDER_WEIGHT_DESC }
 }
-export function orderAZ(){
-    return {type: ORDER_AZ}
+export function orderAZ() {
+    return { type: ORDER_AZ }
 }
-export function orderZA(){
-    return {type: ORDER_ZA}
+export function orderZA() {
+    return { type: ORDER_ZA }
 }
 
-export function getAlldogs(){  // ok!
-    return async function (dispatch){
+export function getAlldogs() {  // ok!
+    return async function (dispatch) {
         try {
             const r = await fetch(URL_DOGS);
             const res = await r.json();
@@ -49,7 +49,6 @@ export function getAlldogs(){  // ok!
         }
     }
 }
-
 
 export const getDogDetail = (id) => async dispatch => { // ok!!
     try {
@@ -61,16 +60,16 @@ export const getDogDetail = (id) => async dispatch => { // ok!!
 
 }
 
-export function clearAllDogs(){ // ok!
-    return {type: CLEAR_ALLDOG}
-} 
+export function clearAllDogs() { // ok!
+    return { type: CLEAR_ALLDOG }
+}
 
-export function clearDetail(){
-    return {type: CLEAR_DETAIL}
-} 
+export function clearDetail() {
+    return { type: CLEAR_DETAIL }
+}
 
-export function searchbar(name){
-    return async function (dispatch){
+export function searchbar(name) {
+    return async function (dispatch) {
         try {
             const r = await fetch(`${URL_DOGS}?name=${name}`);
             const res = await r.json();
@@ -78,31 +77,42 @@ export function searchbar(name){
         } catch (error) {
             return console.log("ERROR--->", error);
         }
-    } 
+    }
 }
 
-// export function CREATE_DOG(input) { 
-//     return async function (dispatch) {
-//         try {
-//             const r = await fetch(URL + dog)
-
-//         } catch (error) {
-            
-//         }
-//     }
-// }
-export function getTemperaments () {
-    return async function (dispatch){
+export function createDog(dog) {
+    return async function (dispatch) {
+        try {
+            let perro = {                
+                name: dog.name,
+                height: `${dog.heightMin} - ${dog.heightMax}`,
+                weight: `${dog.weightMin} - ${dog.weightMax}`,
+                life_span: `${dog.life_spanMin} - ${dog.life_spanMax}`,
+                image: dog.image,
+                temperamentos: dog.temperament.map(t=> parseInt(t.id))
+            }
+            await axios.post(URL_DB, perro)
+            console.log(perro)
+            return dispatch({
+            type: CREATE_DOG
+        })
+    } catch (error) {
+            return console.log(error)
+    }
+}
+}
+export function getTemperaments() {
+    return async function (dispatch) {
         try {
             const r = await axios(URL_TEMPERAMENT)
             const res = r.data
-            return dispatch({type: GET_TEMPERAMENTS, payload: res})
+            return dispatch({ type: GET_TEMPERAMENTS, payload: res })
         } catch (error) {
-            
+
         }
     }
 }
 
-export function clearSearch (){
-    return {type: CLEAR_SEARCH}
+export function clearSearch() {
+    return { type: CLEAR_SEARCH }
 }

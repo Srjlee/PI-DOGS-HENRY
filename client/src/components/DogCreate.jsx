@@ -1,9 +1,49 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { createDog } from '../redux/actions/actions';
+import {util} from './util'
 
 export default function DogCreate() {
    const temps = useSelector(state => state.temps)
-    const [dog, setDog] = useState({
+   const [errors, setErrors] = useState({})
+   const [dog, setDog] = useState({
+        name: '',
+        heightMin: '',
+        heightMax: '',
+        weightMin: '',
+        weightMax: '',
+        life_spanMin: '',
+        image: '',
+        life_spanMax: '',
+        temperament: [],
+        
+    })
+    
+    const dispatch = useDispatch()  
+    
+
+    const handleInputChange = (e)=> {
+      e.preventDefault();
+      let item = e.target.name
+      if(item === "temperamento") {
+        let temper  = temps.find(t=> t.id == e.target.value)
+        if(!dog.temperament.includes(temper)) setDog({...dog, temperament: [...dog.temperament, temper]});
+      } else {
+        setErrors({...errors, ...util.validate({...dog, [e.target.name] : e.target.value}, item)
+      })
+        
+        setDog({...dog, [e.target.name] : e.target.value});
+      }
+    }
+    const quitar = (e) => {
+      e.preventDefault()
+      setDog({...dog, temperament:dog.temperament.filter(d=>parseInt(d.id) !== parseInt(e.target.value))})
+    }     
+
+    const handleSubmit = (e) => {      
+      e.preventDefault();
+      dispatch(createDog(dog));
+      setDog({
         name: '',
         heightMin: '',
         heightMax: '',
@@ -12,38 +52,15 @@ export default function DogCreate() {
         life_spanMin: '',
         life_spanMax: '',
         temperament: []
-    })
-
-    const handleInputChange = (e)=> {
-      e.preventDefault();
-      if((e.target.name === "temperamento")) {
-        let temper  = temps.find(t=> t.id == e.target.value)
-        if(!dog.temperament.includes(temper)) setDog({...dog, temperament: [...dog.temperament, temper]});
-      } else {
-        setDog({...dog, [e.target.name] : e.target.value});
-      }
-    }
-    const quitar = (e) => {
-      e.preventDefault()
-      setDog({...dog, temperament:dog.temperament.filter(d=>parseInt(d.id) !== parseInt(e.target.value))})
-    }  
-
-    const validate = (dog) => {
-      let errors = {}
-      if(!dog.name)  errors.name = "Name is required"
-      if(dog.heightMax < dog.heightMin) error.heightMax = "HeightMax must be greater than HeightMin"
-      if(dog.weightMax < dog.weightMin) error.weightMin = "WeightMax must be greater than WeightMin"
-      if(life_spanMax < dog.lifeSpanMin) error.life_Span = "LifeSpanMax must be greater than LifeSpanMin"      
-    }
-
-    const handleSubmit = (e) => {
-      e.preventDefault()
+      })
+      
     }
 
   return (
     <div>
-        <form  onSubmit={handleSubmit}>
+        <form  onSubmit={util.handleSubmit}>
         <div className="datos">
+
         <label htmlFor="name">Name: </label>
         <input
         type="text"
@@ -52,41 +69,67 @@ export default function DogCreate() {
         onChange={handleInputChange}        
         placeholder="Name of New Breed"
         />
+        {errors.name === '' ? null : <p>{errors.name}</p>}
+
         <br />
+
+        <label htmlFor="image">Image: </label>
+        <input 
+        type='text'
+        name='image'
+        value={dog.image}
+        onChange={handleInputChange}
+        placeholder="Select one image for the breed"/>
+        {errors.image === '' ? null : <p>{errors.image}</p>}
+        
+        <br />
+      <div className="heightMin-Max">
+
         <label htmlFor="height">Height: </label>
         <input
         type="number"
         name="heightMin"
         value={dog.heightMin} 
         onChange={handleInputChange}
-        placeholder="Minimum Height"
-        />        <p> - </p>
+        placeholder="Minimum"
+        /> 
+
         <input
         type="number"
         name="heightMax"
         value={dog.heightMax} 
         onChange={handleInputChange}
-        placeholder="Maximun Height"
+        placeholder="Maximun"
         />
-
+      </div>
+      {errors.heightMin === '' ? null : <p>{errors.heightMin} </p>}
+      {errors.heightMax === '' ? null : <p>{errors.heightMax}</p>}
+      
         <br />
+        <div className="weightMinMax">
+
         <label htmlFor="weight">Weight: </label>
         <input
         type="text"
         name="weightMin"
         value={dog.weightMin} 
         onChange={handleInputChange}
-        placeholder="Minimum Weight"
-        />
-        <p> - </p>        
+        placeholder="Minimum"
+        />        
         <input
         type="text"
         name="weightMax"
         value={dog.weightMax} 
         onChange={handleInputChange}
-        placeholder="Maximun Weight"
+        placeholder="Maximun"
         />
+        </div>
+        {errors.weightMin === '' ? null : <p>{errors.weightMin}</p>}
+        {errors.weightMax === '' ? null : <p>{errors.weightMax}</p>}
         <br />
+        
+        <div className="life_spanMinMax">
+
         <label htmlFor="life_span">Life Span: </label>
         <input
         type="text"
@@ -94,8 +137,8 @@ export default function DogCreate() {
         value={dog.life_spanMin} 
         onChange={handleInputChange}
         placeholder="Minimun Life Span"
-        />
-        <p> - </p>        
+        />       
+        
         <input
         type="text"
         name="life_spanMax"
@@ -103,6 +146,9 @@ export default function DogCreate() {
         onChange={handleInputChange}
         placeholder="Maximun Life Span"
         />
+        </div>
+        {errors.life_spanMin === '' ? null : <p>{errors.life_spanMin}</p>}
+        {errors.life_spanMax === '' ? null : <p>{errors.life_spanMax}</p>}
         <br />
           <select multiple name="temperamento" onChange={handleInputChange} className="">
           
@@ -120,7 +166,7 @@ export default function DogCreate() {
         </div>
         <br />
         <br />
-        <button type="submit" >Create Breed</button>
+        <button type="submit">Create Breed</button>
 
 
         </form>

@@ -1,4 +1,4 @@
-import { GET_ALL_DOGS, GET_DOG_DETAIL, ORDER_WEIGHT_ASC, ORDER_WEIGHT_DESC, CLEAR_SEARCH, SEARCH_DOG, CLEAR_DETAIL,CLEAR_ALLDOG, GET_TEMPERAMENTS, FILTER_TEMPERAMENTS,FILTER_ORIGIN,ORDER_WEIGHT,ORDER_AZ,ORDER_ZA} from "../actions/actions";
+import { GET_ALL_DOGS, GET_DOG_DETAIL, CREATE_DOG, ORDER_WEIGHT_ASC, ORDER_WEIGHT_DESC, CLEAR_SEARCH, SEARCH_DOG, CLEAR_DETAIL,CLEAR_ALLDOG, GET_TEMPERAMENTS, FILTER_TEMPERAMENTS, ORDER_AZ,ORDER_ZA} from "../actions/actions";
 import { store } from "../store/store";
 
 const initialState ={
@@ -20,6 +20,10 @@ function ordenar(arr, prop) {
 
 function reducer(state=initialState, {type, payload}){
     switch(type){
+        case CREATE_DOG:{
+            return {...state}
+        }
+
         case FILTER_TEMPERAMENTS:{
             let copia = [...state.allDogs]
             let filtrado = copia.filter(p=> p.temperament?.toLowerCase().includes(payload))
@@ -29,9 +33,7 @@ function reducer(state=initialState, {type, payload}){
             delete state.searchDog
             return {...state}
         }
-        case FILTER_ORIGIN:{
-
-        }
+        
         case ORDER_WEIGHT_ASC:{
             if(!state.searchDog) {                
                 let ordenado = ordenar([...state.allDogs], 'weight' )

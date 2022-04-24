@@ -57,7 +57,15 @@ export default function Dogs() {
               </div>
             </>
             :
-            dogs.searchDog.length === 0 ? <p>No se encontraron Resultados</p> :
+            dogs.searchDog.length === 0 ?<>
+              <div className="notFind">
+                <div className="notFindImg">
+                  <img src="https://c.tenor.com/ZaAuxQ8MxMkAAAAC/dog-what-fuck-all.gif" alt="" />
+                </div>
+                <p>The breed you were looking for was not found ...</p>
+              </div>
+            
+            </>  :
               <>
                 {currentDogs?.map(p => (
                   <Dog

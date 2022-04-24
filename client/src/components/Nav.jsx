@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {
   getTemperaments,
-  filterTemperament,
-  filterOrigin,
+  filterTemperament,  
   orderAZ, clearSearch, orderWeightAsc, orderWeightDesc,
   orderZA,
   searchbar
