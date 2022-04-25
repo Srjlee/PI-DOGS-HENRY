@@ -10,11 +10,7 @@ export default function Dog ({id, image, name, temperament, weight}) {
     const pDetail = (e)=> {
         dispatch(getDogDetail(id))    
     }
-
-
     return (
-        
-
             <div className="perro" key={id}>
                 <div className="perroImg">
                 <img src={image} alt="aun no cargo" />

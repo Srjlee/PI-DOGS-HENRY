@@ -17,14 +17,13 @@ function ordenar(arr, prop) {
     });
     return ordenado
 }
-
 function reducer(state=initialState, {type, payload}){
     switch(type){
         case CREATE_DOG:{
             return {...state}
         }
-
         case FILTER_TEMPERAMENTS:{
+            if(payload === '') return {...state}
             let copia = [...state.allDogs]
             let filtrado = copia.filter(p=> p.temperament?.toLowerCase().includes(payload))
             return {...state, searchDog: filtrado }

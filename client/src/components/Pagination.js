@@ -1,5 +1,5 @@
 import React from 'react';
-import './Dog.css'
+import './pagination.css'
 
 const Pagination = ({ dogsPerPage, totalDogs, paginate }) => {
   const pageNumbers = [];
@@ -9,16 +9,22 @@ const Pagination = ({ dogsPerPage, totalDogs, paginate }) => {
   }
 
   return (
-    <nav>
-         <button > ◀️ </button>
-      <ul className='pagination'>
-        {pageNumbers.map(number => (
-          <li key={number} className='page-item'>
-              <button onClick={() => paginate(number)}>{number}</button>            
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div className="pagination">
+
+      <div className="pages">
+        <button className="btn">{`<<`}</button>
+        {
+          pageNumbers.map(number => (
+            <button key={number} className="btn" onClick={() => paginate(number)}>{number}</button>
+          ))
+        }
+        <button className="btn">{`>>`}</button>
+
+      </div>
+
+
+    </div>
+
   );
 };
 

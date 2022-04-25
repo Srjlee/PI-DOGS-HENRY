@@ -3,7 +3,7 @@ import Dog from './Dog';
 import Pagination from './Pagination';
 import { getAlldogs } from '../redux/actions/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import './Dog.css'
+import './Dogs.css'
 
 export default function Dogs() {
   const dispatch = useDispatch()
@@ -28,13 +28,13 @@ export default function Dogs() {
 
   return (
     <div>
-
       <div className="perros">
 
         {
           !dogs.searchDog ? !dogs.allDogs ? <img src="https://i2.wp.com/revista.weepec.com/wp-content/uploads/2017/04/caminar.gif?zoom=1.5&resize=500%2C317&ssl=1" alt="Cargando" /> :
             <>
-              <div className="perros">
+            <div className="container">
+              <div className="dogs">
                 {currentDogs?.map(p => (
                   <Dog
                     key={p.id}
@@ -53,20 +53,26 @@ export default function Dogs() {
                   dogsPerPage={dogsPerPage}
                   totalDogs={dogs.allDogs.length}
                   paginate={paginate} />
-                <button> &gt; </button>
+                
               </div>
+            </div>
             </>
             :
             dogs.searchDog.length === 0 ?<>
+            <div className="container">
               <div className="notFind">
                 <div className="notFindImg">
                   <img src="https://c.tenor.com/ZaAuxQ8MxMkAAAAC/dog-what-fuck-all.gif" alt="" />
                 </div>
-                <p>The breed you were looking for was not found ...</p>
+                <h2>The breed you were looking for was not found ...</h2>
               </div>
+
+            </div>
             
             </>  :
               <>
+              <div className="container">
+              <div className="dogs">
                 {currentDogs?.map(p => (
                   <Dog
                     key={p.id}
@@ -76,12 +82,14 @@ export default function Dogs() {
                     weight={p.weight}
                     id={p.id}
                   />))}
-
+                  </div>
+        <div className="botonera">
                 <Pagination
                   dogsPerPage={dogsPerPage}
                   totalDogs={dogs.searchDog.length}
                   paginate={paginate} />
-
+            </div>
+            </div>
               </>
 
         }
