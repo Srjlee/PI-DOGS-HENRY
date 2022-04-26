@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {
   getTemperaments,
+  clearAllDogs,
   filterTemperament,
   orderAZ, clearSearch, orderWeightAsc, orderWeightDesc,
   orderZA,
@@ -55,23 +56,23 @@ export default function Nav() {
       <div className="navDiv">
           <ul className="list-ul">
             <li className="list-li">
-              <select onChange={filter}>
-                <option value=''  selected>Filter of Temperament</option>
+              <select onChange={filter} defaultValue={'DEFAULT'}>
+                <option value='' >Filter of Temperament</option>
                 {temps?.map(t => (
                   <option key={t.id} value={t.name} >{t.name}</option>
                 ))}
               </select>
             </li>
             <li className="list-li">
-              <select onChange={orderWeight} >
-                <option defaultValue='' selected >Order by weight</option>
+              <select onChange={orderWeight} defaultValue={'DEFAULT'} >
+                <option value=''>Order by weight</option>
                 <option value='asc'>Ascendente</option>
                 <option value='des'>Descendente</option>
               </select>
             </li>
             <li className="list-li">
-              <select onChange={orderRaza}>
-                <option defaultValue='' selected>Order by Name</option>
+              <select onChange={orderRaza} defaultValue={'DEFAULT'}>
+                <option value=''  >Order by Name</option>
                 <option value='asc'>Ascendente</option>
                 <option value='des'>Descendente</option>
               </select>
@@ -84,7 +85,7 @@ export default function Nav() {
             <button >Buscar</button>
           </form>
               <Link to="/dog">
-                <button>Crear Nueva Raza</button>
+                <button onClick={()=>dispatch(clearAllDogs())} >Crear Nueva Raza</button>
               </Link>
           </div>
       </div>

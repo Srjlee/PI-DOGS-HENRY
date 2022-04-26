@@ -1,6 +1,6 @@
 
 const { Router } = require('express');
-const { Dog } = require('../db');
+const { Dog, Temperamento} = require('../db');
 
 const router = Router();
 
@@ -18,12 +18,18 @@ router.post('/', async(req, res)=>{ // hecha!!
                 image: image
             }
         })
-        if(created) {
-            await nuevoPerro.addTemperamentos(temperamentos)
+        if(created) {            
+            const temps = await Temperamento.findAll({
+                where: {
+                    id: temperamentos
+                }
+            })            
+            await nuevoPerro.addTemperamentos(temps)
             return res.send('Perro felizmente creado!')
         }             
         res.send('la raza ya existe. Por favor piensa una nueva ...')        
     } catch (error) {
+        console.log(error)
         res.status(404).send(error)        
     }
 })

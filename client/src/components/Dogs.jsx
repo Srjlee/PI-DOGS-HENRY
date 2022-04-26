@@ -20,10 +20,6 @@ export default function Dogs() {
   const currentDogs = !dogs.searchDog ? dogs.allDogs?.slice(indexPrimerPost, indexPostAnterior) :
     dogs.searchDog?.slice(indexPrimerPost, indexPostAnterior)
 
-
-
-
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   return (

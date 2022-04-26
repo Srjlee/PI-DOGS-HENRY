@@ -12,13 +12,13 @@ const Pagination = ({ dogsPerPage, totalDogs, paginate }) => {
     <div className="pagination">
 
       <div className="pages">
-        <button className="btn">{`<<`}</button>
+        
         {
           pageNumbers.map(number => (
             <button key={number} className="btn" onClick={() => paginate(number)}>{number}</button>
           ))
         }
-        <button className="btn">{`>>`}</button>
+        
 
       </div>
 

@@ -1,0 +1,17 @@
+.form {
+    display: flex;flex-direction: column;
+}
+.container {
+    display:flex;
+
+}
+
+.heightMin-Max {
+    display: flex;
+
+}
+.minHeight {}
+
+.separator {
+    align-items: flex-start;
+}

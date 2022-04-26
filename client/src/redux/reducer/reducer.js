@@ -9,12 +9,23 @@ const initialState ={
     
 }
 
-function ordenar(arr, prop) {
-    let ordenado = arr.sort(function (a, b) {
-        if (a[prop] < b[prop]) { return -1; }
-        if (a[prop] > b[prop]) { return 1; }
-        return 0;
-    });
+function ordenar(arr, prop) {   
+    let ordenado = [] 
+    if(prop === 'name') {
+        ordenado = arr.sort(function (a, b) {        
+            if (a[prop] < b[prop]) { return -1; }
+            if (a[prop] > b[prop]) { return 1; }
+            return 0;
+        });
+    } else 
+    {
+        ordenado = arr.sort(function (a, b) {            
+            if (a[prop][0] < b[prop][0]) { return -1; }
+            if (a[prop][0] > b[prop][0]) { return 1; }
+            return 0;
+        });
+    
+    }
     return ordenado
 }
 function reducer(state=initialState, {type, payload}){
@@ -34,7 +45,8 @@ function reducer(state=initialState, {type, payload}){
         }
         
         case ORDER_WEIGHT_ASC:{
-            if(!state.searchDog) {                
+            if(!state.searchDog) {
+
                 let ordenado = ordenar([...state.allDogs], 'weight' )
                 return {...state, allDogs: ordenado}
             } else {

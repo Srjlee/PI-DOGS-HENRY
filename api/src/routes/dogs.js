@@ -46,8 +46,8 @@ router.get('/', async (req, res) => {  // Back 1 y 2
                     id: p.id,
                     image: p.image,
                     name: p.name, 
-                    weight: p.weight,
-                    temperament: p.temperamentos.map(t=> t.name).toString()                    
+                    weight: validarPeso(p.weight),
+                    temperament: p.temperamentos.map(t=> t.name).join(', ')                    
                 }
                 return pdb                
             })
@@ -145,7 +145,7 @@ router.get('/:id', async (req, res) => {    ///  Hecha!
                 weight: validarPeso(buscado.weight.metric),
                 life_span: buscado.life_span,
                 temperament: buscado.temperament
-            }
+            }   
     
             return res.json(resp)
         } catch (error) {
