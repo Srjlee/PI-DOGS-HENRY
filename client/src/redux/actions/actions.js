@@ -91,10 +91,14 @@ export function createDog(dog) {
                 image: dog.image,
                 temperamentos: dog.temperament.map(t=> parseInt(t.id))
             }
+
+            let resp = ''
             await axios.post(URL_DB, perro)
-            console.log(perro)
+            .then(r => resp = r.data )
+            console.log(resp)
+                      
             return dispatch({
-            type: CREATE_DOG
+            type: CREATE_DOG, payload: resp
         })
     } catch (error) {
             return console.log(error)

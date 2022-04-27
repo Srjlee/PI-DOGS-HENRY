@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createDog } from '../redux/actions/actions';
 import { util } from './util'
 import './Createdog.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function DogCreate() {
-  const temps = useSelector(state => state.temps)
+  const store = useSelector(state => state)
+  const mensaje = useSelector(state => state.searchDog)
   const [errors, setErrors] = useState({})
-  const [dog, setDog] = useState({
+  const dogInitial ={
     name: '',
     heightMin: '',
     heightMax: '',
     weightMin: '',
     weightMax: '',
-    life_spanMin: '',
     image: '',
+    life_spanMin: '',
     life_spanMax: '',
-    temperament: [],
+    temperament: []
+    
+  }
+  const [dog, setDog] = useState(dogInitial)
 
-  })
-
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
 
@@ -28,7 +31,7 @@ export default function DogCreate() {
     e.preventDefault();
     let item = e.target.name
     if (item === "temperamento") {
-      let temper = temps.find(t => t.id == e.target.value)
+      let temper = store.temps.find(t => t.id == e.target.value)
       if (!dog.temperament.includes(temper)) setDog({ ...dog, temperament: [...dog.temperament, temper] });
     } else {
       setErrors(
@@ -44,25 +47,30 @@ export default function DogCreate() {
   }
 
   const submitOk = (errors) => {
+    if(dog.name === '') return true
+    if(dog.weightMax == '' || dog.weightMin == '') return true
+    if(dog.heightMax == '' || dog.heightMin == '') return true
+
     for (let prop in errors){
       if(errors.hasOwnProperty(prop)) return true;
     }
     return false
   }
-  const handleSubmit = (e) => {
+
+  const showResp = (mensaje) => {
+    if(mensaje.hasOwnProperty('mensaje')) return alert(`${mensaje.mensaje}`)
+  }
+
+  const handleSubmit =(e) => {
     e.preventDefault();
     dispatch(createDog(dog));
-    setDog({
-      name: '',
-      heightMin: '',
-      heightMax: '',
-      weightMin: '',
-      weightMax: '',
-      life_spanMin: '',
-      life_spanMax: '',
-      temperament: []
-    })
+    setDog(dogInitial);     
+    navigate('/msj')
   }
+  
+  
+  
+  
 
   return (
     <div>
@@ -168,7 +176,7 @@ export default function DogCreate() {
           <br />
           <select multiple name="temperamento" onChange={handleInputChange} className="">
 
-            {temps.map(t => (
+            {store.temps.map(t => (
               <option key={t.id} value={t.id} >{t.name}</option>
             ))}
           </select>
@@ -181,7 +189,9 @@ export default function DogCreate() {
           ))}
         </div>
         </div>
+        
         <button type="submit"  disabled={submitOk(errors)}>Create Breed</button>
+        
         <Link to="/dogs">
         <button>Volver</button>
         </Link>

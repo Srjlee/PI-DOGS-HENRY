@@ -31,7 +31,7 @@ function ordenar(arr, prop) {
 function reducer(state=initialState, {type, payload}){
     switch(type){
         case CREATE_DOG:{
-            return {...state}
+            return {...state, searchDog: payload}
         }
         case FILTER_TEMPERAMENTS:{
             if(payload === '') return {...state}

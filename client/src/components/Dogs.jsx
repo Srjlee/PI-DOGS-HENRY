@@ -3,6 +3,7 @@ import Dog from './Dog';
 import Pagination from './Pagination';
 import { getAlldogs } from '../redux/actions/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import './Dogs.css'
 
 export default function Dogs() {
@@ -12,7 +13,9 @@ export default function Dogs() {
   useEffect(() => {
     dispatch(getAlldogs())
   }, [])
+
   const dogs = useSelector(state => state)
+  
 
   // Traigo los perros de la paginate
   const indexPostAnterior = currentPage * dogsPerPage;
