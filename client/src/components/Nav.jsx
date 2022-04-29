@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {
   getTemperaments,
   clearAllDogs,
-  filterTemperament,
+  filterTemperament, filterOrigin,
   orderAZ, clearSearch, orderWeightAsc, orderWeightDesc,
   orderZA,
   searchbar
@@ -38,6 +38,11 @@ export default function Nav() {
     if ((e.target.value) === 'des') return dispatch(orderZA());
     return
   }
+  const origin = (e)=> {    
+    if((e.target.value) === 'all') return dispatch(clearSearch())
+    return dispatch(filterOrigin(e.target.value));
+      }
+
   const orderWeight = (e) => {
     if ((e.target.value) === 'asc') return dispatch(orderWeightAsc());
     if ((e.target.value) === 'des') return dispatch(orderWeightDesc());
@@ -55,6 +60,14 @@ export default function Nav() {
         
       <div className="navDiv">
           <ul className="list-ul">
+            <li className="list-li">
+            <select onChange={origin}  defaultValue={'DEFAULT'}>
+                <option value='all' >Show All</option>
+                <option value='api' >Existing Breeds</option>
+                <option value='db' >Breeds Created</option>
+                
+              </select>
+            </li>
             <li className="list-li">
               <select onChange={filter} defaultValue={'DEFAULT'}>
                 <option value='' >Filter of Temperament</option>

@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {  // Back 1 y 2
                 let perro = {
                     id: p.id,
                     image: p.image.url,
-                    name: p.name,
+                    name: p.name.toLowerCase(),
                     temperament: p.temperament,
                     weight: validarPeso(p.weight.metric)
                 }
@@ -45,7 +45,7 @@ router.get('/', async (req, res) => {  // Back 1 y 2
                 let pdb = {
                     id: p.id,
                     image: p.image,
-                    name: p.name, 
+                    name: p.name.toLowerCase(), 
                     weight: validarPeso(p.weight),
                     temperament: p.temperamentos.map(t=> t.name).join(', ')                    
                 }

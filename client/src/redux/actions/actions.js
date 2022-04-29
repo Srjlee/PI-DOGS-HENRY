@@ -22,8 +22,10 @@ const URL_TEMPERAMENT = "http://localhost:3001/temperament"
 export function filterTemperament(temp) {
     return { type: FILTER_TEMPERAMENTS, payload: temp }
 }
-export function filterOrigin() {
-    return { type: FILTER_ORIGIN }
+export function filterOrigin(origin) {
+
+    console.log(origin)
+    return { type: FILTER_ORIGIN, payload: origin }
 }
 export function orderWeightAsc() {
     return { type: ORDER_WEIGHT_ASC }
@@ -89,13 +91,14 @@ export function createDog(dog) {
                 weight: `${dog.weightMin} - ${dog.weightMax}`,
                 life_span: `${dog.life_spanMin} - ${dog.life_spanMax}`,
                 image: dog.image,
-                temperamentos: dog.temperament.map(t=> parseInt(t.id))
+                temperamentos: dog.temperament.map(t=> parseInt(t.id)) ///  1
             }
+            
 
             let resp = ''
             await axios.post(URL_DB, perro)
             .then(r => resp = r.data )
-            console.log(resp)
+            
                       
             return dispatch({
             type: CREATE_DOG, payload: resp

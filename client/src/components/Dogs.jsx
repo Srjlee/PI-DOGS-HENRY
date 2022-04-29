@@ -32,7 +32,7 @@ export default function Dogs() {
         {
           !dogs.searchDog ? !dogs.allDogs ? <img src="https://i2.wp.com/revista.weepec.com/wp-content/uploads/2017/04/caminar.gif?zoom=1.5&resize=500%2C317&ssl=1" alt="Cargando" /> :
             <>
-            <div className="container">
+            <div className="containerDogs">
               <div className="dogs">
                 {currentDogs?.map(p => (
                   <Dog
@@ -58,7 +58,7 @@ export default function Dogs() {
             </>
             :
             dogs.searchDog.length === 0 ?<>
-            <div className="container">
+            <div className="containerDogs">
               <div className="notFind">
                 <div className="notFindImg">
                   <img src="https://c.tenor.com/ZaAuxQ8MxMkAAAAC/dog-what-fuck-all.gif" alt="" />
@@ -70,7 +70,7 @@ export default function Dogs() {
             
             </>  :
               <>
-              <div className="container">
+              <div className="containerDogs">
               <div className="dogs">
                 {currentDogs?.map(p => (
                   <Dog

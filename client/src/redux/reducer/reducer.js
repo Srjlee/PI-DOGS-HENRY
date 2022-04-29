@@ -1,4 +1,4 @@
-import { GET_ALL_DOGS, GET_DOG_DETAIL, CREATE_DOG, ORDER_WEIGHT_ASC, ORDER_WEIGHT_DESC, CLEAR_SEARCH, SEARCH_DOG, CLEAR_DETAIL,CLEAR_ALLDOG, GET_TEMPERAMENTS, FILTER_TEMPERAMENTS, ORDER_AZ,ORDER_ZA} from "../actions/actions";
+import { GET_ALL_DOGS, GET_DOG_DETAIL, CREATE_DOG, ORDER_WEIGHT_ASC, ORDER_WEIGHT_DESC, CLEAR_SEARCH, SEARCH_DOG, CLEAR_DETAIL,CLEAR_ALLDOG, GET_TEMPERAMENTS, FILTER_TEMPERAMENTS, ORDER_AZ,ORDER_ZA, FILTER_ORIGIN} from "../actions/actions";
 import { store } from "../store/store";
 
 const initialState ={
@@ -32,6 +32,12 @@ function reducer(state=initialState, {type, payload}){
     switch(type){
         case CREATE_DOG:{
             return {...state, searchDog: payload}
+        }
+        case FILTER_ORIGIN:{
+            if(payload === 'all') return {...state}
+            if(payload === 'db') return {...state, searchDog: [...state.allDogs].filter(p=> p.id.length === 36)}
+            if(payload === 'api') return {...state, searchDog: [...state.allDogs].filter(p=> p.id.length !== 36)}
+                
         }
         case FILTER_TEMPERAMENTS:{
             if(payload === '') return {...state}

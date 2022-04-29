@@ -13,7 +13,7 @@ body {
     padding-top: 2.5rem;
     
 } 
-.container {
+.containerDogs {
     display: flex;
     flex-direction: column;    
 }
@@ -26,4 +26,5 @@ body {
 }
 .botonera {
     background-color: rgb(221, 221, 115);
+    align-items: center
 }

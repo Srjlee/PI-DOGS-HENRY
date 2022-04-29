@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { Dog, Temperamento} = require('../db');
 const router = Router();
 
+
 router.post('/', async(req, res)=>{ // hecha!!
     let {name, height, weight, life_span, image, temperamentos} = req.body
     if(!name || !height || !weight) return res.status(404).send({mensaje: 'Required data missing'})

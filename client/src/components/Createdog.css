@@ -1,10 +1,40 @@
 .form {
-    display: flex;flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 .container {
     display:flex;
-
+    flex-direction: row;
+    justify-content:space-around;
 }
+.datos-medidas {
+    display: flex;
+    justify-content:space-around;
+    gap: 5rem
+}
+.datos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.min-maxWraper {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.min-maxWraper .min .max p {
+    font-size: 150rem;
+    color: red;
+}
+
+.datos{
+    width: 150px;
+}
+.temperamentos {
+    display: flex;
+    flex-direction: row;
+}
+
 
 .heightMin-Max {
     display: flex;
