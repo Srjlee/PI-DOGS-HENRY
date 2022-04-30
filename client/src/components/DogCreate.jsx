@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createDog } from '../redux/actions/actions';
-import './Createdog.css'
+import './DogCreate.css'
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function DogCreate() {
@@ -84,20 +84,26 @@ export default function DogCreate() {
     navigate('/msj')
   }
   return (
-    <div>
-      <form className="form" onSubmit={handleSubmit}>
+    <div className="create">
+      <form onSubmit={handleSubmit}>
         <div className="container">
           <div className="datos-medidas">
-              <div className="datos">
-                <label htmlFor="name">Name: </label>
+            <div className="datos">
+              <div className="dato">
+                <label htmlFor="name">Name: </label> <br />
                 <input type="text" name="name" value={dog.name} onChange={handleInputChange} placeholder="Name of New Breed" />
+
                 {errors.name === '' ? null : <p>{errors.name}</p>}
-                <br />
-                <label htmlFor="image">Image: </label>
-                <input type='text' name='image' value={dog.image} onChange={handleInputChange} placeholder="Select one image for the breed" />
+              </div>
+              <div className="dato">
+                
+                <label htmlFor="image">Image: </label> <br />
+                <input type='text' name='image' value={dog.image} onChange={handleInputChange} placeholder="Insert img by URL" />
                 {errors.image === '' ? null : <p>{errors.image}</p>}
               </div>
-              <div className="medidas">
+            </div>
+            <div className="medidas">
+              <div className="medida">
                 <label htmlFor="height">Height: </label>
                 <div className="min-maxWraper" name="height">
                   <div className="min">
@@ -114,6 +120,8 @@ export default function DogCreate() {
                       <p>{errors.heightMax}</p>}
                   </div>
                 </div>
+              </div>
+              <div className="medida">
                 <label htmlFor="weight">Weight: </label>
                 <div className="min-maxWraper" name="weight">
                   <div className="min">
@@ -125,43 +133,43 @@ export default function DogCreate() {
                     {errors.weightMax === '' ?
                       null :
                       <p>{errors.weightMax}</p>}
-                    <br />
-
-                  </div>
-                </div>
-                <label htmlFor="life_span">Life Span: </label>
-                <div className="min-maxWraper">
-                  <div className="min">
-                    <input
-                      type="text"
-                      name="life_spanMin"
-                      value={dog.life_spanMin}
-                      onChange={handleInputChange}
-                      placeholder="Minimun Life Span"
-                    />
-                    {errors.life_spanMin === '' ? null : <p>{errors.life_spanMin}</p>}
-                  </div>
-                  <div className="max">
-                    <input
-                      type="text"
-                      name="life_spanMax"
-                      value={dog.life_spanMax}
-                      onChange={handleInputChange}
-                      placeholder="Maximun Life Span"
-                    />
-                    {errors.life_spanMax === '' ? null : <p>{errors.life_spanMax}</p>}
-
+                    
                   </div>
                 </div>
               </div>
+              <div className="medida">
+              <label htmlFor="life_span">Life Span: </label>
+              <div className="min-maxWraper">
+                <div className="min">
+                  <input
+                    type="text"
+                    name="life_spanMin"
+                    value={dog.life_spanMin}
+                    onChange={handleInputChange}
+                    placeholder="Minimun Life Span"
+                  />
+                  {errors.life_spanMin === '' ? null : <p>{errors.life_spanMin}</p>}
+                </div>
+                <div className="max">
+                  <input
+                    type="text"
+                    name="life_spanMax"
+                    value={dog.life_spanMax}
+                    onChange={handleInputChange}
+                    placeholder="Maximun Life Span"
+                  />
+                  {errors.life_spanMax === '' ? null : <p>{errors.life_spanMax}</p>}
+                </div>
+              </div>
+
+
+              </div>
+            </div>
 
           </div>
-
-
           <div className="temperamentos">
-            <div className="select">
+            <div className="selector">
               <select multiple name="temperamento" onChange={handleInputChange} className="">
-
                 {store.temps.map(t => (
                   <option key={t.id} value={t.id} >{t.name}</option>
                 ))}
@@ -169,25 +177,16 @@ export default function DogCreate() {
 
             </div>
             <div className="mapeo">
-              <ul>
-                <li>
-                  {dog.temperament.map(btn => (
-                    <button key={btn.id} type="button" onClick={quitar} value={btn.id} className="onClose">{btn.name}</button>
-                  ))}
-                </li>
-              </ul>
-
+              {dog.temperament.map(btn => (
+                <button key={btn.id} type="button" onClick={quitar} value={btn.id} className="onClose">{btn.name}</button>
+              ))}
             </div>
           </div>
         </div>
-
-        <button type="submit" disabled={submitOk(errors)}>Create Breed</button>
-
-        <Link to="/dogs">
-          <button>Volver</button>
-        </Link>
-
-
+        <div className="botones">
+          <button type="submit" disabled={submitOk(errors)}>Create Breed</button>
+          <button onClick={() => navigate("/dogs")}>Volver</button>
+        </div>
       </form>
     </div>
   )

@@ -50,7 +50,7 @@ export default function Nav() {
   }
   return (
     <div className="navegacion">
-      {!dogs?.length ? <p></p> : <>
+      {!dogs?.length ? null : <>
         <nav className="navbar">
           <Link to='/dogs'>
             <div className="imgNavBar" onClick={vertodos}>

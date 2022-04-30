@@ -2,21 +2,30 @@ body {
     background-color: beige;
 }
 
-.dogs {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 15px;
-    grid-row-gap: 15px;
-}
-.perros {
-    padding-top: 2.5rem;
-    
-} 
 .containerDogs {
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
+    align-content: center;
+    /* margin-left: 150px; */
+    
 }
+.agrupador {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.agrupador div {
+    align-items:center;
+}
+
+.dogs {
+    display: flex;
+    justify-content:center;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+
 .notFindImg {
     width: 30rem;
     height: 30rem;
@@ -24,7 +33,4 @@ body {
 .notFindImg img {
     width: 100%;
 }
-.botonera {
-    background-color: rgb(221, 221, 115);
-    align-items: center
-}
+

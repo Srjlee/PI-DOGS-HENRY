@@ -15,7 +15,7 @@ export default function Dogs() {
   }, [])
 
   const dogs = useSelector(state => state)
-  
+
 
   // Traigo los perros de la paginate
   const indexPostAnterior = currentPage * dogsPerPage;
@@ -27,70 +27,70 @@ export default function Dogs() {
 
   return (
     <div>
-      <div className="perros">
-
+      <div className="containerDogs">
         {
           !dogs.searchDog ? !dogs.allDogs ? <img src="https://i2.wp.com/revista.weepec.com/wp-content/uploads/2017/04/caminar.gif?zoom=1.5&resize=500%2C317&ssl=1" alt="Cargando" /> :
             <>
-            <div className="containerDogs">
-              <div className="dogs">
-                {currentDogs?.map(p => (
-                  <Dog
-                    key={p.id}
-                    image={p.image}
-                    name={p.name}
-                    temperament={p.temperament}
-                    weight={p.weight}
-                    id={p.id}
-                  />
-                ))}
+
+              <div className="agrupador">
+                <div className="dogs">
+                  {currentDogs?.map(p => (
+                    <Dog
+                      key={p.id}
+                      image={p.image}
+                      name={p.name}
+                      temperament={p.temperament}
+                      weight={p.weight}
+                      id={p.id}
+                    />
+                  ))}
+                </div>
+
+                <div className="botonera">
+                     
+                  <Pagination
+                    dogsPerPage={dogsPerPage}
+                    totalDogs={dogs.allDogs.length}
+                    paginate={paginate} />
+                       
+                </div>
               </div>
 
-              <div className="botonera">
-
-                <Pagination
-                  dogsPerPage={dogsPerPage}
-                  totalDogs={dogs.allDogs.length}
-                  paginate={paginate} />
-                
-              </div>
-            </div>
             </>
             :
-            dogs.searchDog.length === 0 ?<>
-            <div className="containerDogs">
-              <div className="notFind">
-                <div className="notFindImg">
-                  <img src="https://c.tenor.com/ZaAuxQ8MxMkAAAAC/dog-what-fuck-all.gif" alt="" />
+            dogs.searchDog.length === 0 ? <>
+              <div className="containerDogs">
+                <div className="notFind">
+                  <div className="notFindImg">
+                    <img src="https://c.tenor.com/ZaAuxQ8MxMkAAAAC/dog-what-fuck-all.gif" alt="" />
+                  </div>
+                  <h2>The breed you were looking for was not found ...</h2>
                 </div>
-                <h2>The breed you were looking for was not found ...</h2>
+
               </div>
 
-            </div>
-            
-            </>  :
+            </> :
               <>
-              <div className="containerDogs">
-              <div className="dogs">
-                {currentDogs?.map(p => (
-                  <Dog
-                    key={p.id}
-                    image={p.image}
-                    name={p.name}
-                    temperament={p.temperament}
-                    weight={p.weight}
-                    id={p.id}
-                  />))}
+                <div className="containerDogs">
+                  <div className="dogs">
+                    {currentDogs?.map(p => (
+                      <Dog
+                        key={p.id}
+                        image={p.image}
+                        name={p.name}
+                        temperament={p.temperament}
+                        weight={p.weight}
+                        id={p.id}
+                      />))}
                   </div>
-        <div className="botonera">
-                <Pagination
-                  dogsPerPage={dogsPerPage}
-                  totalDogs={dogs.searchDog.length}
-                  paginate={paginate} />
-            </div>
-            </div>
+                  <div className="botonera">
+                    <Pagination
+                      dogsPerPage={dogsPerPage}
+                      totalDogs={dogs.searchDog.length}
+                      paginate={paginate} />
+                  </div>
+                </div>
               </>
-
         }
       </div>
 

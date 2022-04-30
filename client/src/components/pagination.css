@@ -7,7 +7,8 @@
   }
   .pages {
   position: relative;  
-  display: inline-flex;
+  display: flex;
+  gap: 0.1rem;
   vertical-align: middle;
 }
 .btn {
