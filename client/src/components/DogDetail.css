@@ -1,0 +1,54 @@
+.dogDetail {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 5px;
+    background-color: rgb(221, 221, 115);
+    border-radius: 100px;
+
+    margin: 50px;
+
+    }
+    
+    .imagenDetail { grid-area: 1 / 1 / 6 / 2; 
+        align-self: center;
+        justify-self: center;}
+    .nombreDetail { grid-area: 1 / 2 / 2 / 3; 
+        align-self: center;
+        justify-self: center;}
+    .datosDetail { grid-area: 2 / 2 / 5 / 3; align-self: center;
+        justify-self: center;}
+
+    .botonDetail { grid-area: 5 / 2 / 6 / 3; align-self: center;
+        justify-self: center;}
+    
+    .botonDetail button {
+        display: inline-block;    
+    color: white;
+    margin-left: 1rem;
+    text-align: center;
+    background-color: #9f8e10;
+    border: 1px solid  white;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    }
+    .botonDetail button:hover{
+        box-shadow: 0px 2px 4px whitesmoke;
+        background-color: #d0c042;
+
+      }
+
+    .imgContain { 
+        max-width: 500px;
+        background-color: #9f8e10;
+        border-radius: 100px;
+        padding: 10px;
+    }
+
+    .imgContain img {
+        width: 100%;
+        border-radius: 100px;
+    }

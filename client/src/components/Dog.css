@@ -24,8 +24,15 @@
     border-radius: 85px;
     padding: 2px;
     margin: 5px;
-
 }
+.perro:hover{
+    border-radius: 15%;
+    -webkit-border-radius:15%;
+    box-shadow: 0px 0px 5px 5px #9f8e10;
+    -webkit-box-shadow: 0px 0px 5px 5px #9f8e10;
+    
+    }
+
 .perroImg img {
     width: 100%;
     height: 100%;
@@ -38,26 +45,37 @@
     margin: 0;
     text-decoration: none;
 }
-.perroDatos {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-  
-    
+.perroDatos {    
+    display: flex;
+    flex-direction: column;
 }
-.perroDatos .perroN {
-    margin-top:1px;
 
-    height: 0.1rem;
-}
-.perroDatos .perroT {
-    padding:10px;
-    height: auto;
-    max-height: 200px;
-}
-.perroDatos .perroP {
-    height: 2rem;
-}
+
+
 .pagination {
     list-style:none;
+}
+
+.notFind {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.notFindImg {
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    border-radius:50px;
+    margin-top: 15px;
+    
+}
+.notFindImg img{
+    width: 100%;
+    height: 100%;
+    border-radius:50px
+
+}
+
+
+.notFindImg img {
+    width: 100%;
 }

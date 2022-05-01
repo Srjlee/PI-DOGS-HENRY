@@ -10,11 +10,13 @@ export default function Dogs() {
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1);
   const dogsPerPage = 8;
-  useEffect(() => {
+  const dogs = useSelector(state => state)
+  useEffect(() => {  
     dispatch(getAlldogs())
   }, [])
 
-  const dogs = useSelector(state => state)
+  
+
 
 
   // Traigo los perros de la paginate
@@ -29,7 +31,23 @@ export default function Dogs() {
     <div>
       <div className="containerDogs">
         {
-          !dogs.searchDog ? !dogs.allDogs ? <img src="https://i2.wp.com/revista.weepec.com/wp-content/uploads/2017/04/caminar.gif?zoom=1.5&resize=500%2C317&ssl=1" alt="Cargando" /> :
+          !dogs.searchDog ? !dogs.allDogs ? 
+          <>
+              <div className="agrupador">
+                <div className="notFind">
+                  <div className="notFindImg">
+                    <img src="https://i2.wp.com/revista.weepec.com/wp-content/uploads/2017/04/caminar.gif?zoom=1.5&resize=500%2C317&ssl=1" alt="Loading ..." />
+                  </div>
+                  <div className="mensaje">
+
+                  <h2>Loading ...</h2>
+                  </div>
+                </div>
+
+              </div>
+
+            </> 
+           :
             <>
 
               <div className="agrupador">
@@ -58,20 +76,24 @@ export default function Dogs() {
 
             </>
             :
-            dogs.searchDog.length === 0 ? <>
-              <div className="containerDogs">
+            dogs.searchDog.length === 0 ? 
+            <>
+              <div className="agrupador">
                 <div className="notFind">
                   <div className="notFindImg">
                     <img src="https://c.tenor.com/ZaAuxQ8MxMkAAAAC/dog-what-fuck-all.gif" alt="" />
                   </div>
+                  <div className="mensaje">
+
                   <h2>The breed you were looking for was not found ...</h2>
+                  </div>
                 </div>
 
               </div>
 
             </> :
               <>
-                <div className="containerDogs">
+                <div className="agrupador">
                   <div className="dogs">
                     {currentDogs?.map(p => (
                       <Dog

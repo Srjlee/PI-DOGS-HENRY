@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createDog } from '../redux/actions/actions';
 import './DogCreate.css'
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 export default function DogCreate() {
   const store = useSelector(state => state)
+  
+
+  
+  
+  
+  
 
   const [errors, setErrors] = useState({})
   const dogInitial = {
@@ -27,6 +33,9 @@ export default function DogCreate() {
   const validate = (dog) => {
     let errors = {}
     if (!dog.name) errors.name = "Name is required"
+    if(dog.name) {
+      if(dog.heightMin == 0 || dog.heightMax == 0 || dog.weightMin == 0 || dog.weightMax == 0)  errors.flag = true
+    } 
     //if(!dog.image) errors.image = 'Image is required'   
     if (dog.heightMin !== 0) {
       if (!dog.heightMin || isNaN(dog.heightMin) || dog.heightMin < 0) errors.heightMin = "Must be a number and not be null"
@@ -85,6 +94,11 @@ export default function DogCreate() {
   }
   return (
     <div className="create">
+      <div className="titulo">
+      <h2>Create your Breed</h2>
+
+      </div>
+      
       <form onSubmit={handleSubmit}>
         <div className="container">
           <div className="datos-medidas">

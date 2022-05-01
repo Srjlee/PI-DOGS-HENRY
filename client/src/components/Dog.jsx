@@ -17,15 +17,13 @@ export default function Dog ({id, image, name, temperament, weight}) {
                 <img src={image} alt="aun no cargo" />
                 </div>
                 <div className="perroDatos">
+                    <div className="perroN" onClick={pDetail}>
                     <Link to={`/dogs/${id}`}>
-                    <div className="perroN">
-                    <h4 className="" onClick={pDetail}> {name} </h4>
-                    </div>
+                    <h4 className="" > {name} </h4>
                     </Link>
-                    <div className="perroT">
-                    <p className="">Temperament: {temperament}</p>
                     </div>
-                    <div className="perroP">
+                    <div className="perroT">
+                    <p className="">Temperament: {temperament}</p>                    
                     <p className="">weight: {weight[0]} - {weight[1]}</p>
 
                     </div>

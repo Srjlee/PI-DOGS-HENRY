@@ -26,7 +26,7 @@ router.post('/', async(req, res)=>{ // hecha!!
             await nuevoPerro.addTemperamentos(temps)
             return res.send({mensaje: 'Breed happily created!!'})
         }             
-        res.send({mensaje: 'The breed already exists... Look for it through our APP!!'})        
+        res.send({mensaje: `The breed already exists ... and it's angry. Find it through the search bar`})        
     } catch (error) {
         console.log(error)
         res.status(404).send(error)        

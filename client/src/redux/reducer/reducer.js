@@ -5,8 +5,7 @@ const initialState ={
     allDogs: [],
     DogDetail:{},
     temps: [],
-    searchDog:[],
-    
+    searchDog:[],    
 }
 
 function ordenar(arr, prop) {   

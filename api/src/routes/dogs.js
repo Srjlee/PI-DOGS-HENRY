@@ -13,8 +13,8 @@ const router = Router();
 
 function validarPeso(peso) {
     let [min, max] = peso.split("-");
-    min = isNaN(min) ? "x" : parseInt(min);
-    max = isNaN(max) ? "x" : parseInt(max);
+    min = isNaN(min) ? "0" : parseInt(min);
+    max = isNaN(max) ? "0" : parseInt(max);
     return [min, max];
   }
 

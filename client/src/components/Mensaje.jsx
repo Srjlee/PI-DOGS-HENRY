@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearSearch } from '../redux/actions/actions'
-import { Link, useNavigate } from 'react-router-dom';
-export default function Mensaje() {   
+import {  useNavigate } from 'react-router-dom';
+import './msj.css';
+export default function Mensaje() {
 
     const msj = useSelector(state => state.searchDog)
     const [datos, setDatos] = useState({})
-    
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     useEffect(() => {
         renderStrategy(msj?.mensaje)
-    },[msj])
+    }, [msj])
 
     const btnOk = () => {
         dispatch(clearSearch());
@@ -24,22 +25,19 @@ export default function Mensaje() {
     }
 
     const renderStrategy = (msj) => {
-        if(msj === 'Required data missing') return setDatos(renderObj.dataMissing)
-        if(msj === 'Breed happily created!!') return setDatos(renderObj.createOk)
-        if(msj === 'The breed already exists... Look for it through our APP!!') return setDatos(renderObj.breedExist)
-
+        if (msj === 'Required data missing') return setDatos(renderObj.dataMissing)
+        if (msj === 'Breed happily created!!') return setDatos(renderObj.createOk)
+        if (msj === `The breed already exists ... and it's angry. Find it through the search bar`) return setDatos(renderObj.breedExist)
     }
-    
-
     const renderObj = {
         dataMissing: {
             mensaje: msj?.mensaje,
-            img: 'https://i.makeagif.com/media/7-31-2018/01nLwv.gif',            
+            img: 'https://i.makeagif.com/media/7-31-2018/01nLwv.gif',
             btn: 'Try again'
         },
         createOk: {
             mensaje: msj?.mensaje,
-            img: 'https://c.tenor.com/UPYp0YKSOT4AAAAS/sonrisa-emocion.gif',
+            img: 'https://t1.ea.ltmcdn.com/es/posts/1/3/2/como_hacer_feliz_a_tu_perro_24231_600.jpg',
             btn: 'New Breed'
         },
         breedExist: {
@@ -51,21 +49,30 @@ export default function Mensaje() {
 
     }
 
-
-
     return (
-        <div>
+        <div className="contain">
+            <div className="cuadro">            
             {!datos ? null : <>
 
-                <dialog open>
-                    <img src={datos.img} alt="imagen" />
-                    <h2>{datos.mensaje}</h2>
-                    <button onClick={btnOk}>Go Dogs</button>
-                    <button onClick={newCreate}>{datos.btn}</button>
-                </dialog>
+                <div className="mensaje">
+                    <div className="msjImg">
+                        <img src={datos.img} alt="img" />
+                    </div>
+                    <div className="msg">
+                        <h2>{datos.mensaje} </h2>
+                    </div>
+                    <div className="botonesMsj">
+                        <button onClick={btnOk}>Go Dogs</button>
+                        <button onClick={newCreate}>{datos.btn}</button>
+                    </div>
+                </div>
+
+
+                
+            
             </>}
 
-
+            </div>
 
 
         </div>
