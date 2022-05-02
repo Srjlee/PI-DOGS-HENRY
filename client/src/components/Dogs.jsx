@@ -14,12 +14,7 @@ export default function Dogs() {
   useEffect(() => {  
     dispatch(getAlldogs())
   }, [])
-
   
-
-
-
-  // Traigo los perros de la paginate
   const indexPostAnterior = currentPage * dogsPerPage;
   const indexPrimerPost = indexPostAnterior - dogsPerPage;
   const currentDogs = !dogs.searchDog ? dogs.allDogs?.slice(indexPrimerPost, indexPostAnterior) :

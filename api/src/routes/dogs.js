@@ -92,7 +92,7 @@ router.get('/', async (req, res) => {  // Back 1 y 2
 
             res.json(perrosDB.concat(final));
         } catch (error) {
-            res.status(404).json([{name: 'No hay datos con ese nombre'}])
+            res.status(404).send(error)
         }
     }
 })

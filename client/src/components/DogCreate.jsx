@@ -6,13 +6,6 @@ import {  useNavigate } from 'react-router-dom';
 
 export default function DogCreate() {
   const store = useSelector(state => state)
-  
-
-  
-  
-  
-  
-
   const [errors, setErrors] = useState({})
   const dogInitial = {
     name: '',
@@ -23,16 +16,35 @@ export default function DogCreate() {
     weightMax: '0',
     life_spanMin: '0',
     life_spanMax: '0',
-    temperament: []
+    temperament: [],
+    btn: {
+      class: 'inactivo', 
+      disabled: true,
+    }
 
   }
   const [dog, setDog] = useState(dogInitial)
+  const [submit, setsubmit] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    if(dog.name && !errors.flag) {
+      setsubmit(true) 
+    } else {
+      setsubmit(false)
+    }
+  },[errors, dog, submit])
+
+  const imageValidate = (URL) => {
+    const regex = new RegExp(/(https?:\/\/.*\.(?:png|jpg|gif))/);
+    if (regex.test(URL)) return URL;
+    if (!regex.test(URL)) return "https://i.pinimg.com/564x/9b/92/b4/9b92b4f32a1c318c406796016bc9bd1c.jpg";
+  };
+
   const validate = (dog) => {
     let errors = {}
-    if (!dog.name) errors.name = "Name is required"
+    if (!dog.name) {errors.name = "Name is required"}
     if(dog.name) {
       if(dog.heightMin == 0 || dog.heightMax == 0 || dog.weightMin == 0 || dog.weightMax == 0)  errors.flag = true
     } 
@@ -65,27 +77,18 @@ export default function DogCreate() {
       let temper = store.temps.find(t => t.id == e.target.value)
       if (!dog.temperament.includes(temper)) setDog({ ...dog, temperament: [...dog.temperament, temper] });
     } else {
-      setErrors(
-        validate({ ...dog, [e.target.name]: e.target.value }, item)
+      setErrors( 
+        validate({ ...dog, [e.target.name]: e.target.value})
       )
-
       setDog({ ...dog, [e.target.name]: e.target.value });
+      
     }
   }
   const quitar = (e) => {
     e.preventDefault();
     setDog({ ...dog, temperament: dog.temperament.filter(d => parseInt(d.id) !== parseInt(e.target.value)) })
   }
-  const submitOk = (errors) => {
-    if (dog.name === '') return true
-    if (dog.weightMax == '' || dog.weightMin == '') return true
-    if (dog.heightMax == '' || dog.heightMin == '') return true
-
-    for (let prop in errors) {
-      if (errors.hasOwnProperty(prop)) return true;
-    }
-    return false
-  }
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createDog(dog));
@@ -198,8 +201,9 @@ export default function DogCreate() {
           </div>
         </div>
         <div className="botones">
-          <button type="submit" disabled={submitOk(errors)}>Create Breed</button>
-          <button onClick={() => navigate("/dogs")}>Volver</button>
+        <button type="submit" disabled={!submit} className={submit ? "activo" : "inactivo"}>Create Breed</button>
+          
+          <button onClick={() => navigate("/dogs")}   className="activo">Volver</button>
         </div>
       </form>
     </div>

@@ -2,19 +2,25 @@ const { Router } = require('express');
 const { Dog, Temperamento} = require('../db');
 const router = Router();
 
+const imageValidate = (URL) => {
+    const regex = new RegExp(/(https?:\/\/.*\.(?:png|jpg|gif))/);
+    if (regex.test(URL)) return URL;
+    if (!regex.test(URL)) return "https://i.pinimg.com/564x/9b/92/b4/9b92b4f32a1c318c406796016bc9bd1c.jpg";
+  };
+
 
 router.post('/', async(req, res)=>{ // hecha!!
     let {name, height, weight, life_span, image, temperamentos} = req.body
     if(!name || !height || !weight) return res.status(404).send({mensaje: 'Required data missing'})
     try {        
         const [nuevoPerro, created] = await Dog.findOrCreate( {
-            where: {name: name},
+            where: {name: name.toLowerCase()},
             defaults: {
-                name: name,
+                name: name.toLowerCase(),
                 height: height,
                 weight: weight,
                 life_span: life_span,
-                image: image
+                image: imageValidate(image)
             }
         })
         if(created) {            
