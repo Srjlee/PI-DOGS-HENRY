@@ -6,6 +6,31 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,  NODE_ENV
 } = process.env;
 
+
+
+let connection;
+let options;
+
+if (NODE_ENV === "local") {
+  connection = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`;
+  options = {
+    logging: false,
+    native: false,
+  };
+} else if (NODE_ENV === "production") {
+  connection = process.env.DATABASE_URL;
+  options = {
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+  };
+}
+
+const sequelize = new Sequelize(connection, options);
+
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`, {
 //   logging: false, // set to console.log to see the raw SQL queries
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -43,28 +68,3 @@ module.exports = {
 };
 
 /// DEPLOY 
-
-
-
-let connection;
-let options;
-
-if (NODE_ENV === "local") {
-  connection = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`;
-  options = {
-    logging: false,
-    native: false,
-  };
-} else if (NODE_ENV === "production") {
-  connection = process.env.DATABASE_URL;
-  options = {
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
-  };
-}
-
-const sequelize = new Sequelize(connection, options);
