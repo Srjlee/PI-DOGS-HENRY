@@ -6,8 +6,6 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,  NODE_ENV
 } = process.env;
 
-
-
 let connection;
 let options;
 
@@ -67,4 +65,3 @@ module.exports = {
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };
 
-/// DEPLOY 

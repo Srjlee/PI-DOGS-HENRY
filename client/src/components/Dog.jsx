@@ -8,7 +8,7 @@ import './Dog.css'
 export default function Dog ({id, image, name, temperament, weight}) {
     const dispatch = useDispatch()
 
-    const pDetail = (e)=> {
+    const pDetail = ()=> {
         dispatch(getDogDetail(id))    
     }
     return (
@@ -17,7 +17,7 @@ export default function Dog ({id, image, name, temperament, weight}) {
                 <img src={image} alt="aun no cargo" />
                 </div>
                 <div className="perroDatos">
-                    <div className="perroN" onClick={pDetail}>
+                    <div className="perroN" >
                     <Link to={`/dogs/${id}`}>
                     <h4 className="" > {name} </h4>
                     </Link>

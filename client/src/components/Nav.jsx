@@ -16,6 +16,7 @@ export default function Nav() {
     name: '',
   })
 
+  const selects = 'DEFAULT'
   const search = (e) => {
     setBuscar({ name: e.target.value })
   }
@@ -43,6 +44,7 @@ export default function Nav() {
     return dispatch(filterOrigin(e.target.value));
       }
 
+      
   const orderWeight = (e) => {
     if ((e.target.value) === 'asc') return dispatch(orderWeightAsc());
     if ((e.target.value) === 'des') return dispatch(orderWeightDesc());
@@ -69,23 +71,23 @@ export default function Nav() {
               </select>
             </li>
             <li className="list-li">
-              <select onChange={filter} defaultValue={'DEFAULT'}>
-                <option value='' >Filter of Temperament</option>
+              <select onChange={filter} value={selects}>
+                <option value='DEFAULT' >Filter of Temperament</option>
                 {temps?.map(t => (
                   <option key={t.id} value={t.name} >{t.name}</option>
                 ))}
               </select>
             </li>
             <li className="list-li">
-              <select onChange={orderWeight} defaultValue={'DEFAULT'} >
-                <option value=''>Order by weight</option>
+              <select onChange={orderWeight} defaultValue={selects} >
+                <option value='DEFAULT'>Order by weight</option>
                 <option value='asc'>Ascendente</option>
                 <option value='des'>Descendente</option>
               </select>
             </li>
             <li className="list-li">
-              <select onChange={orderRaza} defaultValue={'DEFAULT'}>
-                <option value=''  >Order by Name</option>
+              <select onChange={orderRaza} value={selects}>
+                <option value='DEFAULT'  >Order by Name</option>
                 <option value='asc'>Ascendente</option>
                 <option value='des'>Descendente</option>
               </select>
