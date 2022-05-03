@@ -15,9 +15,10 @@ export const ORDER_WEIGHT_DESC = "ORDER_WEIGHT_DESC";
 export const ORDER_AZ = "ORDER_AZ";
 export const ORDER_ZA = "ORDER_ZA";
 
-const URL_DOGS = "http://localhost:3001/dogs";
-const URL_DB = "http://localhost:3001/dog";
-const URL_TEMPERAMENT = "http://localhost:3001/temperament"
+const URL_SRJLEE = process.env.REACT_APP_API_URL||"http://localhost:3001"
+const URL_DOGS = URL_SRJLEE + "/dogs";
+const URL_DB = URL_SRJLEE + "/dog";
+const URL_TEMPERAMENT = URL_SRJLEE + "/temperament";
 
 export function filterTemperament(temp) {
     return { type: FILTER_TEMPERAMENTS, payload: temp }
