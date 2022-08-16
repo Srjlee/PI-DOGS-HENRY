@@ -18,6 +18,8 @@ function validarPeso(peso) {
     return [min, max];
   }
 
+  
+
 router.get('/', async (req, res) => {  // Back 1 y 2
     let { name } = req.query
     if (!name) {
