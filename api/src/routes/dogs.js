@@ -10,13 +10,6 @@ const { URL_API } = process.env;
 
 const router = Router();
 
-// function validarPeso(peso) {
-//     let [min, max] = peso.split("-");
-//     min = isNaN(min) ? "0" : parseInt(min);
-//     max = isNaN(max) ? "0" : parseInt(max);
-//     return [min, max];
-//   }
-
 router.get("/", async (req, res) => {
   // Back 1 y 2
   let { name } = req.query;
