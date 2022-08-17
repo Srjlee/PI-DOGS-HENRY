@@ -1,42 +1,47 @@
-const { Router } = require('express');
-const { Dog, Temperamento} = require('../db');
+const { Router } = require("express");
+const { Dog, Temperamento } = require("../db");
 const router = Router();
+const { imageValidate } = require("../utils/funciones");
 
-const imageValidate = (URL) => {
-    const regex = new RegExp(/(https?:\/\/.*\.(?:png|jpg|gif))/);
-    if (regex.test(URL)) return URL;
-    if (!regex.test(URL)) return "https://i.pinimg.com/564x/9b/92/b4/9b92b4f32a1c318c406796016bc9bd1c.jpg";
-  };
+// const imageValidate = (URL) => {
+//   const regex = new RegExp(/(https?:\/\/.*\.(?:png|jpg|gif))/);
+//   if (regex.test(URL)) return URL;
+//   if (!regex.test(URL))
+//     return "https://i.pinimg.com/564x/9b/92/b4/9b92b4f32a1c318c406796016bc9bd1c.jpg";
+// };
 
-
-router.post('/', async(req, res)=>{ // hecha!!
-    let {name, height, weight, life_span, image, temperamentos} = req.body
-    if(!name || !height || !weight) return res.status(404).send({mensaje: 'Required data missing'})
-    try {        
-        const [nuevoPerro, created] = await Dog.findOrCreate( {
-            where: {name: name.toLowerCase()},
-            defaults: {
-                name: name.toLowerCase(),
-                height: height,
-                weight: weight,
-                life_span: life_span,
-                image: imageValidate(image)
-            }
-        })
-        if(created) {            
-            const temps = await Temperamento.findAll({
-                where: {
-                    id: temperamentos
-                }
-            })            
-            await nuevoPerro.addTemperamentos(temps)
-            return res.send({mensaje: 'Breed happily created!!'})
-        }             
-        res.send({mensaje: `The breed already exists ... and it's angry. Find it through the search bar`})        
-    } catch (error) {
-        console.log(error)
-        res.status(404).send(error)        
+router.post("/", async (req, res) => {
+  // hecha!!
+  let { name, height, weight, life_span, image, temperamentos } = req.body;
+  if (!name || !height || !weight)
+    return res.status(404).send({ mensaje: "Required data missing" });
+  try {
+    const [nuevoPerro, created] = await Dog.findOrCreate({
+      where: { name: name.toLowerCase() },
+      defaults: {
+        name: name.toLowerCase(),
+        height: height,
+        weight: weight,
+        life_span: life_span,
+        image: imageValidate(image),
+      },
+    });
+    if (created) {
+      const temps = await Temperamento.findAll({
+        where: {
+          id: temperamentos,
+        },
+      });
+      await nuevoPerro.addTemperamentos(temps);
+      return res.send({ mensaje: "Breed happily created!!" });
     }
-})
+    res.send({
+      mensaje: `The breed already exists ... and it's angry. Find it through the search bar`,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).send(error);
+  }
+});
 
 module.exports = router;
