@@ -4,8 +4,6 @@ import Pagination from "./Pagination";
 import { getAlldogs } from "../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 
-import "./Dogs.css";
-
 export default function Dogs() {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
@@ -87,26 +85,24 @@ export default function Dogs() {
           </>
         ) : (
           <>
-            <div className="agrupador">
-              <div className="dogs">
-                {currentDogs?.map((p) => (
-                  <Dog
-                    key={p.id}
-                    image={p.image}
-                    name={p.name}
-                    temperament={p.temperament}
-                    weight={p.weight}
-                    id={p.id}
-                  />
-                ))}
-              </div>
-              <div className="botonera">
-                <Pagination
-                  dogsPerPage={dogsPerPage}
-                  totalDogs={dogs.searchDog.length}
-                  paginate={paginate}
+            <div className="dogs">
+              {currentDogs?.map((p) => (
+                <Dog
+                  key={p.id}
+                  image={p.image}
+                  name={p.name}
+                  temperament={p.temperament}
+                  weight={p.weight}
+                  id={p.id}
                 />
-              </div>
+              ))}
+            </div>
+            <div className="botonera">
+              <Pagination
+                dogsPerPage={dogsPerPage}
+                totalDogs={dogs.searchDog.length}
+                paginate={paginate}
+              />
             </div>
           </>
         )}

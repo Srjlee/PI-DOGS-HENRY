@@ -1,0 +1,26 @@
+//botones
+.btn {
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  color: white;
+  margin-left: 1rem;
+  text-align: center;
+  border: 1px solid white;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  &:hover {
+    background-color: red;
+    border: 1px solid #6c757d;
+  }
+  &.primary {
+    background-color: #61bdb5;
+    border: 1px solid #6c757d;
+    &:hover {
+      background-color: $primarioHover;
+
+      border: 1px solid #6c757d;
+    }
+  }
+}

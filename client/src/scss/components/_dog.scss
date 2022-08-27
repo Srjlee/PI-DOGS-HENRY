@@ -1,0 +1,72 @@
+.perro {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 230px;
+  height: 350px;
+  background-color: grey;
+  margin: 10px;
+  text-transform: capitalize;
+  text-align: center;
+  background-color: rgb(221, 221, 115);
+  color: white;
+  border-radius: 15px;
+  font-weight: 700;
+}
+.perroImg {
+  height: 230px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: baseline;
+  height: 10rem;
+  background-color: #9f8e10;
+  border-radius: 85px;
+  padding: 2px;
+  margin: 5px;
+}
+.perro:hover {
+  border-radius: 15%;
+  -webkit-border-radius: 15%;
+  box-shadow: 0px 0px 5px 5px #9f8e10;
+  -webkit-box-shadow: 0px 0px 5px 5px #9f8e10;
+}
+
+.perroImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 85px;
+}
+.perro a {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+.perroDatos {
+  display: flex;
+  flex-direction: column;
+}
+
+.pagination {
+  list-style: none;
+}
+
+.notFind {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.notFindImg {
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 50px;
+  margin-top: 15px;
+}
+.notFindImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+}
+
+.notFindImg img {
+  width: 100%;
+}

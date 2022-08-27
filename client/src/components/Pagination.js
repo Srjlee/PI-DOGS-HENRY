@@ -1,5 +1,4 @@
-import React from 'react';
-import './pagination.css'
+import React from "react";
 
 const Pagination = ({ dogsPerPage, totalDogs, paginate }) => {
   const pageNumbers = [];
@@ -10,19 +9,18 @@ const Pagination = ({ dogsPerPage, totalDogs, paginate }) => {
 
   return (
     <div className="pagination">
-
-      <div className="pages">        
-        {
-          pageNumbers.map(number => (
-            <button key={number} className="btn" onClick={() => paginate(number)}>{number}</button>
-          ))
-        }       
-
+      <div className="pages">
+        {pageNumbers.map((number) => (
+          <button
+            key={number}
+            className="btn primary"
+            onClick={() => paginate(number)}
+          >
+            {number}
+          </button>
+        ))}
       </div>
-
-
     </div>
-
   );
 };
 

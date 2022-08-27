@@ -1,0 +1,21 @@
+@import "base/reset";
+@import "base/variables";
+@import "base/botones";
+@import "base/select";
+@import "components/dogs";
+@import "components/nav";
+@import "components/dog";
+@import "components/pagination";
+
+//@import "components/dogsCreate";
+
+.App {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: $background;
+
+  font-family: "Comic Neue", cursive;
+  font-size: 16px;
+}

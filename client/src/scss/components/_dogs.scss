@@ -1,0 +1,29 @@
+body {
+  background-color: beige;
+}
+
+.containerDogs {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: red;
+  margin: 100px;
+}
+.agrupador {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: green;
+  margin: 200px;
+}
+
+.agrupador div {
+  align-items: center;
+}
+
+.dogs {
+  display: flex;
+  justify-content: center;
+  flex-flow: row;
+  flex-wrap: wrap;
+}

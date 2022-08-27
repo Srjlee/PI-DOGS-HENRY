@@ -1,0 +1,375 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+code,
+em,
+img,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+b,
+u,
+i,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+main,
+canvas,
+embed,
+footer,
+header,
+nav,
+section,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: none;
+}
+
+footer,
+header,
+nav,
+section,
+main {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.btn {
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  color: white;
+  margin-left: 1rem;
+  text-align: center;
+  border: 1px solid white;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+}
+.btn:hover {
+  background-color: red;
+  border: 1px solid #6c757d;
+}
+.btn.primary {
+  background-color: #61bdb5;
+  border: 1px solid #6c757d;
+}
+.btn.primary:hover {
+  background-color: #3c9089;
+  border: 1px solid #6c757d;
+}
+
+.select-control {
+  display: block;
+  width: 15rem;
+  height: 2.5rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  color: #495057;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+.select-control option {
+  font-size: 1rem;
+  color: #495057;
+}
+
+body {
+  background-color: beige;
+}
+
+.containerDogs {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: red;
+  margin: 100px;
+}
+
+.agrupador {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: green;
+  margin: 200px;
+}
+
+.agrupador div {
+  align-items: center;
+}
+
+.dogs {
+  display: flex;
+  justify-content: center;
+  flex-flow: row;
+  flex-wrap: wrap;
+}
+
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.5rem 1rem;
+}
+
+.navegacion {
+  background-color: #9ad5d0;
+  flex-direction: column;
+}
+
+.navDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.line2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgNavBar {
+  display: inline-block;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+  width: 8rem;
+  flex-grow: 4;
+}
+
+.imgNavBar img {
+  width: 100%;
+}
+
+.list-ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  list-style: none;
+}
+
+.list-li {
+  display: flex;
+  align-items: center;
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.form-inline {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.form-control {
+  display: block;
+  width: 10rem;
+  height: 2.5rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  color: #495057;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.perro {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 230px;
+  height: 350px;
+  background-color: grey;
+  margin: 10px;
+  text-transform: capitalize;
+  text-align: center;
+  background-color: rgb(221, 221, 115);
+  color: white;
+  border-radius: 15px;
+  font-weight: 700;
+}
+
+.perroImg {
+  height: 230px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: baseline;
+  height: 10rem;
+  background-color: #9f8e10;
+  border-radius: 85px;
+  padding: 2px;
+  margin: 5px;
+}
+
+.perro:hover {
+  border-radius: 15%;
+  -webkit-border-radius: 15%;
+  box-shadow: 0px 0px 5px 5px #9f8e10;
+  -webkit-box-shadow: 0px 0px 5px 5px #9f8e10;
+}
+
+.perroImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 85px;
+}
+
+.perro a {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+.perroDatos {
+  display: flex;
+  flex-direction: column;
+}
+
+.pagination {
+  list-style: none;
+}
+
+.notFind {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.notFindImg {
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 50px;
+  margin-top: 15px;
+}
+
+.notFindImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+}
+
+.notFindImg img {
+  width: 100%;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.pages {
+  position: relative;
+  display: flex;
+  gap: 0.1rem;
+  vertical-align: middle;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #9f8e10;
+  border: 1px solid #6c757d;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+}
+
+.App {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #edf8fd;
+  font-family: "Comic Neue", cursive;
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=App.css.map */

@@ -1,0 +1,39 @@
+//Colores
+$background: #edf8fd;
+$primario: #9ad5d0;
+$primarioHover: #3c9089;
+$secundario: #9f8e10;
+$terciario: rgb(221, 221, 115);
+
+// Fuentes
+
+//Mixin
+$breakpoint-xs: 375px;
+$breakpoint-s: 734px;
+$breakpoint-md: 800px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1200px;
+
+@mixin media($media) {
+  @if $media == xs {
+    @media (min-width: $breakpoint-xs) {
+      @content;
+    }
+  } @else if $media == s {
+    @media (min-width: $breakpoint-s) {
+      @content;
+    }
+  } @else if $media == md {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $media == lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $media == xl {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+}

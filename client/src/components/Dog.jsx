@@ -1,8 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getDogDetail } from "../redux/actions/actions";
-import { useDispatch } from "react-redux";
-import "./Dog.css";
 
 export default function Dog({ id, image, name, temperament, weight }) {
   return (
