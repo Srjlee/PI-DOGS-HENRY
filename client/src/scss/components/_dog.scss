@@ -8,7 +8,7 @@
   margin: 10px;
   text-transform: capitalize;
   text-align: center;
-  background-color: rgb(221, 221, 115);
+  background-color: $primario;
   color: white;
   border-radius: 15px;
   font-weight: 700;
@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: baseline;
   height: 10rem;
-  background-color: #9f8e10;
+  background-color: $primarioHover;
   border-radius: 85px;
   padding: 2px;
   margin: 5px;
@@ -27,8 +27,8 @@
 .perro:hover {
   border-radius: 15%;
   -webkit-border-radius: 15%;
-  box-shadow: 0px 0px 5px 5px #9f8e10;
-  -webkit-box-shadow: 0px 0px 5px 5px #9f8e10;
+  box-shadow: 0px 0px 5px 5px $primarioHover;
+  -webkit-box-shadow: 0px 0px 5px 5px $primarioHover;
 }
 
 .perroImg img {

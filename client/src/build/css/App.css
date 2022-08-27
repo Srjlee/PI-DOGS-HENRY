@@ -155,7 +155,7 @@ body {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin: 100px;
+  margin: 50px;
 }
 
 .noencontrado {
@@ -263,7 +263,7 @@ body {
   margin: 10px;
   text-transform: capitalize;
   text-align: center;
-  background-color: rgb(221, 221, 115);
+  background-color: #9ad5d0;
   color: white;
   border-radius: 15px;
   font-weight: 700;
@@ -275,7 +275,7 @@ body {
   align-items: center;
   justify-content: baseline;
   height: 10rem;
-  background-color: #9f8e10;
+  background-color: #3c9089;
   border-radius: 85px;
   padding: 2px;
   margin: 5px;
@@ -284,8 +284,8 @@ body {
 .perro:hover {
   border-radius: 15%;
   -webkit-border-radius: 15%;
-  box-shadow: 0px 0px 5px 5px #9f8e10;
-  -webkit-box-shadow: 0px 0px 5px 5px #9f8e10;
+  box-shadow: 0px 0px 5px 5px #3c9089;
+  -webkit-box-shadow: 0px 0px 5px 5px #3c9089;
 }
 
 .perroImg img {
