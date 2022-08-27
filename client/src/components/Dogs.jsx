@@ -61,6 +61,7 @@ export default function Dogs() {
                   dogsPerPage={dogsPerPage}
                   totalDogs={dogs.allDogs.length}
                   paginate={paginate}
+                  currentPage={currentPage}
                 />
               </div>
             </>
@@ -100,6 +101,7 @@ export default function Dogs() {
                 dogsPerPage={dogsPerPage}
                 totalDogs={dogs.searchDog.length}
                 paginate={paginate}
+                currentPage={currentPage}
               />
             </div>
           </>

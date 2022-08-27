@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createDog } from "../redux/actions/actions";
-import "./DogCreate.css";
+
 import { useNavigate } from "react-router-dom";
 
 export default function DogCreate() {
