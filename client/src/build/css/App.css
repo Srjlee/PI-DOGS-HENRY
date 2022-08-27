@@ -155,15 +155,13 @@ body {
   display: flex;
   flex-direction: column;
   align-content: center;
-  background-color: red;
   margin: 100px;
 }
 
-.agrupador {
+.noencontrado {
   display: flex;
   flex-direction: column;
   align-content: center;
-  background-color: green;
   margin: 200px;
 }
 

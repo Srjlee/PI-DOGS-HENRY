@@ -27,7 +27,7 @@ export default function Dogs() {
         {!dogs.searchDog ? (
           !dogs.allDogs ? (
             <>
-              <div className="agrupador">
+              <div className="noencontrado">
                 <div className="notFind">
                   <div className="notFindImg">
                     <img
@@ -43,33 +43,31 @@ export default function Dogs() {
             </>
           ) : (
             <>
-              <div className="agrupador">
-                <div className="dogs">
-                  {currentDogs?.map((p) => (
-                    <Dog
-                      key={p.id}
-                      image={p.image}
-                      name={p.name}
-                      temperament={p.temperament}
-                      weight={p.weight}
-                      id={p.id}
-                    />
-                  ))}
-                </div>
-
-                <div className="botonera">
-                  <Pagination
-                    dogsPerPage={dogsPerPage}
-                    totalDogs={dogs.allDogs.length}
-                    paginate={paginate}
+              <div className="dogs">
+                {currentDogs?.map((p) => (
+                  <Dog
+                    key={p.id}
+                    image={p.image}
+                    name={p.name}
+                    temperament={p.temperament}
+                    weight={p.weight}
+                    id={p.id}
                   />
-                </div>
+                ))}
+              </div>
+
+              <div className="botonera">
+                <Pagination
+                  dogsPerPage={dogsPerPage}
+                  totalDogs={dogs.allDogs.length}
+                  paginate={paginate}
+                />
               </div>
             </>
           )
         ) : dogs.searchDog.length === 0 ? (
           <>
-            <div className="agrupador">
+            <div className="noencontrado">
               <div className="notFind">
                 <div className="notFindImg">
                   <img
