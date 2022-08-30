@@ -36,7 +36,7 @@ export default function DogDetail() {
             <p>Life Span:{p.life_span}</p>
           </div>
           <div className="botonDetail">
-            <button onClick={() => navigate("/dogs")}>Volver</button>
+            <button className="btn primary" onClick={() => navigate("/dogs")}>Volver</button>
           </div>
         </>
       ) : (

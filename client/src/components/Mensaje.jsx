@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearSearch } from '../redux/actions/actions'
 import {  useNavigate } from 'react-router-dom';
-import './msj.css';
+
 export default function Mensaje() {
 
     const msj = useSelector(state => state.searchDog)
@@ -62,8 +62,8 @@ export default function Mensaje() {
                         <h2>{datos.mensaje} </h2>
                     </div>
                     <div className="botonesMsj">
-                        <button onClick={btnOk}>Go Dogs</button>
-                        <button onClick={newCreate}>{datos.btn}</button>
+                        <button className='btn primary' onClick={btnOk}>Go Dogs</button>
+                        <button className='btn primary' onClick={newCreate}>{datos.btn}</button>
                     </div>
                 </div>
 
