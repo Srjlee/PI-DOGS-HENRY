@@ -274,12 +274,12 @@ export default function DogCreate() {
           <button
             type="submit"
             disabled={!submit}
-            className={submit ? "activo" : "inactivo"}
+            className={submit ? "btn primary" : "btn inactivo"}
           >
             Create Breed
           </button>
 
-          <button onClick={() => navigate("/dogs")} className="activo">
+          <button onClick={() => navigate("/dogs")} className="btn primary">
             Volver
           </button>
         </div>
